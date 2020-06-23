@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dash Eclipse's Personal Site</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dash Eclipse's Personal Site | GPG Key">
+  <meta name="keywords" content="Dash Eclipse, dashezup, EZUP, EasyUP">
+  <meta name="author" content="Dash Eclipse">
+</head>
+<body>
+
+<pre>
+
+   <b>Dash Eclipse's Personal Site</b> (ezup.dev)
+
+   [<a href="./">Home</a>] [<a href="stagit/" target="_blank">Git</a>] <b style="background-color:#EEEEEE">[<a href="gpg.html">GPG</a>]</b> [<a href="about.html">About</a>]
+
+
+   <b>$</b> gpg --import <a href="keys/dashezup-pubkey.asc" target=_blank>dashezup-pubkey.asc</a>
+   <b>$</b> gpg --list-keys --with-subkey-fingerprint --keyid-format none \
+   > | sed 's/\[ unknown\]/          /'
+
+   pub   rsa4096 2020-06-21 [C] [expires: 2050-06-14]
+         <b>67965F307B110019691461A12463834FFD2CBDBB</b>
+   uid                      Dash Eclipse &#x3C;&#x64;&#x61;&#x73;&#x68;&#x40;&#x65;&#x7A;&#x75;&#x70;&#x2E;&#x64;&#x65;&#x76;&#x3E;
+   uid                      Dash Eclipse &#x3C;&#x64;&#x61;&#x73;&#x68;&#x65;&#x7A;&#x75;&#x70;&#x40;&#x70;&#x72;&#x6F;&#x74;&#x6F;&#x6E;&#x6D;&#x61;&#x69;&#x6C;&#x2E;&#x63;&#x6F;&#x6D;&#x3E;
+   sub   rsa4096 2020-06-21 [S] [expires: 2020-07-21]
+         2D89245E3A1CA0A6C2227A7D1C376E4C5C004BE2
+   sub   rsa4096 2020-06-21 [E] [expires: 2020-07-21]
+         4C565DC92AF11EB5B30D626A98CCFFE81DD5E34E
+</pre>
+
+</body>
+</html>
