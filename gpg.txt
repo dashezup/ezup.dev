@@ -1,0 +1,18 @@
+$ gpg --import keys/dashezup-pubkey.asc
+gpg: key 2463834FFD2CBDBB: public key "Dash Eclipse <dash@ezup.dev>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+$ gpg --list-keys --with-subkey-fingerprint \
+\`> --keyid-format none | sed 's/\[ unknown\]/          /'
+/home/dashezup/.gnupg/pubring.kbx
+---------------------------------
+pub   rsa4096 2020-06-21 [C] [expires: 2050-06-14]
+      67965F307B110019691461A12463834FFD2CBDBB
+uid                      Dash Eclipse <dash@ezup.dev>
+uid                      Dash Eclipse <dashezup@protonmail.com>
+sub   rsa4096 2020-06-21 [S] [expires: 2020-07-21]
+      2D89245E3A1CA0A6C2227A7D1C376E4C5C004BE2
+sub   rsa4096 2020-06-21 [E] [expires: 2020-07-21]
+      4C565DC92AF11EB5B30D626A98CCFFE81DD5E34E
+
+$ _

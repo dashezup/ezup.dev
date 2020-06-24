@@ -1,0 +1,21 @@
+$ neofetch --color_blocks off
+                __.;=====;.__                   dash@ezup-c201
+            _.=+==++=++=+=+===;.                --------------
+             -=+++=+===+=+=+++++=_              OS: Void Linux armv7l
+        .     -=:``     `--==+=++==.            Host: Google Speedy
+       _vi,    `            --+=++++:           Kernel: 5.1.0
+      .uvnvi.       _._       -==+==+.          Uptime: secs
+     .vvnvnI`    .;==|==;.     :|=||=|.         Packages: 603 (xbps-query)
++QmQQmpvvnv; _yYsyQQWUUQQQm #QmQ#:QQQWUV$QQm.   Shell: zsh 5.8
+ -QQWQWpvvowZ?.wQQQE==<QWWQ/QWQW.QQWW(: jQWQE   Resolution: 1366x768
+  -$QQQQmmU'  jQQQ@+=<QWQQ)mQQQ.mQQQC+;jWQQ@'   WM: dwm
+   -$WQ8YnI:   QWQQwgQQWV`mWQQ.jQWQQgyyWW@!     Theme: Raleigh [GTK2/3]
+     -1vvnvv.     `~+++`        ++|+++          Icons: Paper-Mono-Dark [GTK2/3]
+      +vnvnnv,                 `-|===           Terminal: st
+       +vnvnvns.           .      :=-           Terminal Font: Fira Code Medium
+        -Invnvvnsi..___..=sv=.     `            CPU: Rockchip (Device Tree) (4) @ 1.800GHz
+          +Invnvnvnnnnnnnnvvnn;.                Memory: 82MiB / 2005MiB
+            ~|Invnvnvvnvvvnnv}+`
+               -~|{*l}*|~
+
+$ _

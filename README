@@ -1,0 +1,26 @@
+Source Code of Dash Eclipse's Personal Site (ezup.dev)
+------------------------------------------------------
+
+The website has a text-only directory listing style with a feeling like
+terminal.
+
+
+Usage
+-----
+
+Install recode, run the script and then check ./.web/
+
+        $ dash make-ezup.sh
+
+
+License
+-------
+
+Source Code of Dash Eclipse's Personal Site by Dash Eclipse
+
+To the extent possible under law, the person who associated CC0 with
+Dash Eclipse has waived all copyright and related or neighboring rights
+to Source Code of Dash Eclipse's Personal Site.
+
+You should have received a copy of the CC0 legalcode along with this
+work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.

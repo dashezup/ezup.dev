@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dash Eclipse's Personal Site</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dash Eclipse's GPG Key">
+  <meta name="keywords" content="Dash Eclipse, dashezup, EZUP, EasyUP Dev">
+  <meta name="author" content="Dash Eclipse">
+  <style>
+  a:link {
+    color: #6871ff;
+  }
+  a:visited {
+  color: #005bbb;
+  }
+  </style>
+</head>
+<body>
+<pre style="margin: 25px 20px 25px;"><b>Dash Eclipse's Personal Site</b> (ezup.dev)
+
+<b>></b> <b style="color:#2da602;">tree</b> <a href="./"><b>../ezup.dev</b></a>
+../ezup.dev
+├── LICENSE
+├── README
+├── <a href="about.html">about.txt</a>
+├── git -> <a href="https://ezup.dev/stagit/" target="_blank">https://ezup.dev/<b>stagit/</b></a>
+├── <a href="gpg.html"><b style=background-color:#b4d5fe;>gpg.txt</b></a>
+├── index.txt
+├── keys
+│   ├── 67965F307B110019691461A12463834FFD2CBDBB.asc
+│   └── <a href="keys/dashezup-pubkey.asc">dashezup-pubkey.asc</a> -> 67965F307B110019691461A12463834FFD2CBDBB.asc
+├── make-ezup.sh
+└── <a href="neofetch.html">neofetch.txt</a>
+
+1 directory, 10 files
+<b>></b> 
+<b>───────────────────────────────────────────────────────────────────────────</b>
+
+<b style="color:#0225c7">dash</b>@ezup <b>~/git/ezup.dev</b> % <b style="color:#00c200;">gpg</b> --import <a href="keys/dashezup-pubkey.asc">keys/dashezup-pubkey.asc</a>
+gpg: key 2463834FFD2CBDBB: public key &quot;Dash Eclipse &lt;dash@ezup.dev&gt;&quot; imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+<b style="color:#0225c7">dash</b>@ezup <b>~/git/ezup.dev</b> % <b style="color:#00c200;">gpg</b> --list-keys --with-subkey-fingerprint \
+\`&gt; --keyid-format none | sed 's/\[ unknown\]/          /'
+/home/dashezup/.gnupg/pubring.kbx
+---------------------------------
+pub   rsa4096 2020-06-21 [C] [expires: 2050-06-14]
+      <b>67965F307B110019691461A12463834FFD2CBDBB</b>
+uid                      Dash Eclipse &lt;dash@ezup.dev&gt;
+uid                      Dash Eclipse &lt;dashezup@protonmail.com&gt;
+sub   rsa4096 2020-06-21 [S] [expires: 2020-07-21]
+      2D89245E3A1CA0A6C2227A7D1C376E4C5C004BE2
+sub   rsa4096 2020-06-21 [E] [expires: 2020-07-21]
+      4C565DC92AF11EB5B30D626A98CCFFE81DD5E34E
+
+<b style="color:#0225c7">dash</b>@ezup <b>~/git/ezup.dev</b> % </pre>
+</body>
+</html>
