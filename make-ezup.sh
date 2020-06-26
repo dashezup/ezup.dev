@@ -41,11 +41,13 @@ for txt in about.txt gpg.txt index.txt neofetch.txt; do
 	fi
 	TEXT=$(cat $txt | recode ascii..html \
 		| sed 's#^$ gpg #<b style="color:\#0225c7">dash</b>@ezup <b>~/git/ezup.dev</b> % <b style="color:\#00c200\;">gpg</b> #' \
+		| sed 's#^$ curl #<b style="color:\#0225c7">dash</b>@ezup <b>~/git/ezup.dev</b> % <b style="color:\#00c200\;">curl</b> #' \
 		| sed 's#^$ cmatrix #<b style="color:\#0225c7">dash</b>@ezup <b>~/git/ezup.dev</b> % <b style="color:\#00c200\;">cmatrix</b> #' \
 		| sed 's#^$ neofetch #<b style="color:\#0225c7">dash</b>@ezup <b>~/git/ezup.dev</b> % <b style="color:\#00c200\;">neofetch</b> #' \
 		| sed 's#^$ _#<b style="color:\#0225c7">dash</b>@ezup <b>~/git/ezup.dev</b> % #' \
 		| sed "s#Source Code of Dash Eclipse's Personal Site#<a href=\"https://ezup.dev/stagit/ezup.dev/\" target="_blank">Source Code of Dash Eclipse's Personal Site</a>#" \
 		| sed 's#67965F307B110019691461A12463834FFD2CBDBB#<b>67965F307B110019691461A12463834FFD2CBDBB</b>#' \
+		| sed 's#1084CEB0AFC0F003132F8F604802C6B37F40927D#<b>1084CEB0AFC0F003132F8F604802C6B37F40927D</b>#' \
 		| sed 's#keys/dashezup-pubkey.asc#<a href="keys/dashezup-pubkey.asc">keys/dashezup-pubkey.asc</a>#')
 	if [ "$txt" = "about.txt" ]; then
 		TEXT=$(echo "$TEXT" | sed 's#About Dash Eclipse#<b><i>About Dash Eclipse</i></b>#' \
