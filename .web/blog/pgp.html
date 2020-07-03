@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-07-03 Fri 02:24 -->
+<!-- 2020-07-03 Fri 15:28 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenPGP Key Generation and Usage</title>
@@ -30,12 +30,13 @@
 <main id="content">
 <header>
 <h1 class="title">OpenPGP Key Generation and Usage</h1>
+<p class="subtitle">Published on 2020-06-30 by Dash Eclipse.</p>
 </header><p>
 In this article I'm gonna explain how do I generate OpenPGP keys and use PGP.
 </p>
 
-<section id="outline-container-org3e3bb72" class="outline-2">
-<h2 id="org3e3bb72"><span class="section-number-2">1</span> Install GnuPG</h2>
+<section id="outline-container-orgabbcd0c" class="outline-2">
+<h2 id="orgabbcd0c"><span class="section-number-2">1</span> Install GnuPG</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 On macOS you can use brew to install GnuPG <code>brew install gnupg</code>
@@ -43,8 +44,8 @@ On macOS you can use brew to install GnuPG <code>brew install gnupg</code>
 </div>
 </section>
 
-<section id="outline-container-orgba3e6b3" class="outline-2">
-<h2 id="orgba3e6b3"><span class="section-number-2">2</span> OpenPGP key generation</h2>
+<section id="outline-container-org46aaefe" class="outline-2">
+<h2 id="org46aaefe"><span class="section-number-2">2</span> OpenPGP key generation</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Beside <code>gpg --full-generate-key</code>, you can also create a key with gpg in batch mode<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
@@ -81,8 +82,8 @@ gpg --batch --generate-key first-last.txt
 </div>
 </section>
 
-<section id="outline-container-orge25b3b0" class="outline-2">
-<h2 id="orge25b3b0"><span class="section-number-2">3</span> Use subkeys</h2>
+<section id="outline-container-org0736801" class="outline-2">
+<h2 id="org0736801"><span class="section-number-2">3</span> Use subkeys</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 I use encryption and signing subkeys instead of just use one key for everything, because it's safer when you keep your master key elsewhere and use different keys for different purposes. Debian also recommend to use subkeys.<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>

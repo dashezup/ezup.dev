@@ -1,8 +1,8 @@
-#+TITLE: Dash Eclipse's Personal Site | ezup.dev
+#+TITLE: Dash Eclipse's Blog | ezup.dev
 
 * OpenPGP Key Generation and Usage
 :PROPERTIES:
 :RSS_PERMALINK: pgp.html
 :PUBDATE:  2020-06-30
-:ID:       5BB9F81C-3369-40B9-83E2-79FE675A2E1F
+:ID:       7F047210-D0F1-43B3-8745-96952CD89494
 :END:

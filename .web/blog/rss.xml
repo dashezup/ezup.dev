@@ -9,18 +9,18 @@
      xmlns:georss="http://www.georss.org/georss"
      xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
      xmlns:media="http://search.yahoo.com/mrss/"><channel>
-  <title>Dash Eclipse's Personal Site | ezup.dev</title>
+  <title>Dash Eclipse's Blog | ezup.dev</title>
   <atom:link href="https://ezup.dev/blog/rss.xml" rel="self" type="application/rss+xml" />
   <link>https://ezup.dev/blog/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Fri, 03 Jul 2020 02:24:44 +0000</pubDate>
-  <lastBuildDate>Fri, 03 Jul 2020 02:24:44 +0000</lastBuildDate>
+  <pubDate>Fri, 03 Jul 2020 15:28:53 +0000</pubDate>
+  <lastBuildDate>Fri, 03 Jul 2020 15:28:53 +0000</lastBuildDate>
   <generator>Emacs 26.3 Org-mode 9.3.7</generator>
   <webMaster>dash@ezup.dev (Dash Eclipse)</webMaster>
   <image>
     <url>https://orgmode.org/img/org-mode-unicorn-logo.png</url>
-    <title>Dash Eclipse's Personal Site | ezup.dev</title>
+    <title>Dash Eclipse's Blog | ezup.dev</title>
     <link>https://ezup.dev/blog/</link>
   </image>
 

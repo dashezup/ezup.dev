@@ -14,12 +14,9 @@
 (require 'ox-publish)
 (require 'ox-rss)
 
-(defvar ezup-url "https://ezup.dev/blog/"
-  "The URL where this site will be published")
 
-(defvar ezup-title "Dash Eclipse's Personal Site | ezup.dev"
-  "The title of this site.")
-
+(defvar ezup-url "https://ezup.dev/blog/")
+(defvar ezup-title "Dash Eclipse's Blog | ezup.dev")
 
 (setq org-html-postamble nil)
       ;;org-export-with-author nil)
@@ -28,7 +25,7 @@
 (setq org-html-divs '((preamble "header" "top")
                       (content "main" "content"))
       org-html-container-element "section"
-      ;;org-html-metadata-timestamp-format psachin-date-format
+      org-html-metadata-timestamp-format "%Y-%m-%d"
       org-html-checkbox-type 'html
       org-html-html5-fancy t
       org-html-validation-link t
@@ -49,6 +46,39 @@
   `(("en" ,(with-temp-buffer
              (insert-file-contents (expand-file-name (format "%s.html" type) "layouts"))
              (buffer-string)))))
+
+;; org-html-publish-to-html
+;; https://code.orgmode.org/bzg/org-mode/src/release_9.3.7/lisp/ox-html.el#L3868-L3880
+(defun ezup/org-html-publish-to-html (plist filename pub-dir)
+  "Wrapper function to publish an file to html.
+
+PLIST contains the properties, FILENAME the source file and
+  PUB-DIR the output directory."
+  (let ((project (cons 'ezup plist)))
+    (plist-put plist :subtitle
+               (format "Published on %s by %s."
+                       (format-time-string "%Y-%m-%d" (org-publish-find-date filename project))
+                       (plist-get plist :author)))
+    (org-html-publish-to-html plist filename pub-dir)))
+
+
+;; org-publish-sitemap-default
+;; https://code.orgmode.org/bzg/org-mode/src/release_9.3.7/lisp/ox-publish.el#L911-L917
+(defun ezup/org-publish-sitemap (title list)
+  "Generate sitemap as a string, having TITLE.
+LIST is an internal representation for the files to include, as
+returned by `org-list-to-lisp'."
+  ;;(let ((filtered-list (cl-remove-if (lambda (x)
+                                       ;;(and (sequencep x) (null (car x))))
+                                     ;;list)))
+    (concat "#+TITLE: " title "\n"
+            ;"#+OPTIONS: title:nil\n"
+            "#+META_TYPE: website\n"
+            "#+DESCRIPTION: Dash Eclipse' Personal Blog\n"
+            ;;"\n#+ATTR_HTML: :class sitemap\n"
+            ; TODO use org-list-to-subtree instead
+            (org-list-to-org list)))
+
 
 ;; org-publish-sitemap-default-entry
 ;; https://code.orgmode.org/bzg/org-mode/src/release_9.3.7/lisp/ox-publish.el#L898-L909
@@ -114,29 +144,29 @@ PROJECT is the current project."
          :base-directory "posts"
          :recursive t
          ;;:section-numbers nil
-	 :with-toc nil
+         :with-toc nil
          :base-extension "org"
          :exclude "rss.org\\|index.org"
-         :publishing-function org-html-publish-to-html
+         ;:exclude ,(regexp-opt '("rss.org" "index.org"))
+         :publishing-function ezup/org-html-publish-to-html
          :publishing-directory ".web/blog"
          :auto-sitemap t
          :sitemap-filename "index.org"
          :sitemap-title "Blog Index"
          :sitemap-style list
          :sitemap-sort-files anti-chronologically
-         :sitemap-function org-publish-sitemap-default
+         :sitemap-function ezup/org-publish-sitemap
          :sitemap-format-entry ezup/org-publish-sitemap-entry
          :author "Dash Eclipse"
          :html-head-include-scripts nil
          :html-head-include-default-style nil
          :html-head ,ezup-html-head
          :html-preamble-format ,(ezup/prepostamble-format "preamble"))
-
         ("rss"
          :base-directory "posts"
          :base-extension "org"
          :recursive nil
-         ;;:exclude (regexp-opt ("rss.org" "index.org"))
+         ;:exclude ,(regexp-opt '("rss.org" "index.org"))
          :exclude "rss.org\\|index.org"
          :publishing-directory ".web/blog"
          :org-rss-use-entry-url-as-guid t
@@ -158,31 +188,26 @@ PROJECT is the current project."
          :with-author t
          :author "Dash Eclipse"
          :email "dash@ezup.dev")
-
         ("images"
          :base-directory "images"
          :base-extension "svg\\|jpg\\|png"
          :publishing-directory ".web/images"
          :publishing-function org-publish-attachment)
-
         ("favicon"
          :base-directory "."
          :base-extension "svg"
          :publishing-directory ".web"
          :publishing-function org-publish-attachment)
-
         ("css"
          :base-directory "styles"
          :base-extension "css"
          :publishing-directory ".web/styles"
          :publishing-function org-publish-attachment)
-
         ("fonts"
          :base-directory "fonts"
          :base-extension "woff2"
          :publishing-directory ".web/fonts"
          :publishing-function org-publish-attachment)
-
         ("html"
          :base-directory "."
          :base-extension "html"
@@ -191,3 +216,4 @@ PROJECT is the current project."
         ("website" :components ("posts" "rss" "images" "css" "fonts" "html"))))
 
 (provide 'publish)
+
