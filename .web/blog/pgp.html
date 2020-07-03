@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-07-03 Fri 02:24 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenPGP Key Generation and Usage</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Dash Eclipse">
+<meta name="keywords" content="openpgp, pgp, gnupg, gpg, subkey">
+<link rel='icon' type='image/x-icon' href='/favicon.svg'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='stylesheet' href='/styles/topnav.css' type='text/css'/>
+<link rel='stylesheet' href='/styles/site.css' type='text/css'/>
+<link rel='stylesheet' href='/styles/syntax-coloring.css' type='text/css'/>
+<link rel='alternate' type='application/rss+xml' title='RSS' href='/blog/rss.xml'>
+</head>
+<body>
+<header id="top" class="status">
+<div>
+<ul class='topnav'>
+<li class='home'><a href='/#dash'>ezup.dev</a></li>
+<li><a class='active' href='./'>Blog</a></li>
+<li><a href='/#pgp'>PGP</a></li>
+<li><a href='/git/' target='_blank'><u>Git</u></a></li>
+<li class='right'><a href='/#about'>About</a></li>
+</ul>
+</div>
+</header>
+<main id="content">
+<header>
+<h1 class="title">OpenPGP Key Generation and Usage</h1>
+</header><p>
+In this article I'm gonna explain how do I generate OpenPGP keys and use PGP.
+</p>
+
+<section id="outline-container-org3e3bb72" class="outline-2">
+<h2 id="org3e3bb72"><span class="section-number-2">1</span> Install GnuPG</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+On macOS you can use brew to install GnuPG <code>brew install gnupg</code>
+</p>
+</div>
+</section>
+
+<section id="outline-container-orgba3e6b3" class="outline-2">
+<h2 id="orgba3e6b3"><span class="section-number-2">2</span> OpenPGP key generation</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Beside <code>gpg --full-generate-key</code>, you can also create a key with gpg in batch mode<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">cat &gt;first-last.txt &lt;&lt;EOF
+<span class="org-sh-heredoc">%echo Generating a basic OpenPGP key</span>
+<span class="org-sh-heredoc">Key-Type: RSA</span>
+<span class="org-sh-heredoc">Key-Length: 4096</span>
+<span class="org-sh-heredoc">Key-Usage: cert</span>
+<span class="org-sh-heredoc">#Subkey-Type: RSA</span>
+<span class="org-sh-heredoc">#Subkey-Length: 4096</span>
+<span class="org-sh-heredoc">Name-Real: First Last</span>
+<span class="org-sh-heredoc">#Name-Comment:</span>
+<span class="org-sh-heredoc">Name-Email: user@domain.tld</span>
+<span class="org-sh-heredoc">Expire-Date: 30y</span>
+<span class="org-sh-heredoc">Passphrase: password</span>
+<span class="org-sh-heredoc">%commit</span>
+<span class="org-sh-heredoc">%echo done</span>
+<span class="org-sh-heredoc">EOF</span>
+</pre>
+</div>
+<p>
+Create a key in an ephemeral home directory
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">mkdir -m700 .gnupg
+<span class="org-comment-delimiter">## </span><span class="org-comment">Set the environment variable</span>
+<span class="org-comment-delimiter">## </span><span class="org-comment">or pass --homedir .gnupg as an argument</span>
+<span class="org-builtin">export</span> <span class="org-variable-name">GNUPGHOME</span>=<span class="org-string">".gnupg"</span>
+gpg --batch --generate-key first-last.txt
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orge25b3b0" class="outline-2">
+<h2 id="orge25b3b0"><span class="section-number-2">3</span> Use subkeys</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+I use encryption and signing subkeys instead of just use one key for everything, because it's safer when you keep your master key elsewhere and use different keys for different purposes. Debian also recommend to use subkeys.<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-comment-delimiter">## </span><span class="org-comment">adduid, (trust, 5,) save</span>
+gpg --edit-key user@domain.tld
+<span class="org-comment-delimiter">## </span><span class="org-comment">Get keygrip</span>
+gpg --with-keygrip --list-key &lt;key-id&gt;
+<span class="org-comment-delimiter">## </span><span class="org-comment">Export and Import the key to the GPG homedir</span>
+<span class="org-comment-delimiter">## </span><span class="org-comment">where you are gonna use the key,</span>
+<span class="org-comment-delimiter">## </span><span class="org-comment">remove the master key from there</span>
+<span class="org-comment-delimiter">## </span><span class="org-comment">and change the password</span>
+rm .gnupg/private-keys-v1.d/&lt;keygrip&gt;.key
+gpg --edit-key &lt;key-id&gt; passwd
+</pre>
+</div>
+</div>
+</section>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+The GNU Privacy Guard Manual - <a href="https://www.gnupg.org/documentation//manuals/gnupg/Unattended-GPG-key-generation.html">4.5.4 Unattended key generation</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+Debian Wiki - <a href="https://wiki.debian.org/Subkeys">Subkeys</a> 
+</p></div></div>
+
+
+</div>
+</div></main>
+</body>
+</html>

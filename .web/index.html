@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dash Eclipse's Personal Site (ezup.dev)</title>
+<link rel="stylesheet" type="text/css" href="/styles/topnav.css">
+<meta name="viewport" content=
+"width=device-width, initial-scale=1">
+<meta name="description" content="Dash Eclipse's Personal Site">
+<meta name="keywords" content=
+"Dash Eclipse, dashezup, EZUP, EasyUP Dev">
+<meta name="author" content="Dash Eclipse">
+<link rel="icon" href="favicon.svg">
+<style>
+/* Text Selection Color */
+::selection {background: lightgray;}
+/* Page Navigation https://dev.to/paulbrowne/comment/ehhk */
+div:not(:target):not(#dash),
+div:target ~ #dash {display: none;}
+/* pre */
+pre {margin-left:2em;margin-top:2em;}
+pre a:link {color:black;background-color:white;}
+pre a:visited {color:black;background-color:white;}
+pre a:hover {color:black;background-color:white}
+@media screen and (max-width: 600px) {
+  pre {
+    margin-left: 0.5em;
+    margin-top: 1em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: justify;
+  }
+}
+</style>
+</head>
+<body>
+<div id="pgp">
+<ul class="topnav">
+<li class="home"><a href="#dash">ezup.dev</a></li>
+<li><a href="/blog">Blog</a></li>
+<li><a class="active" href="#pgp">PGP</a></li>
+<li><a href="git/" target="_blank"><u>Git</u></a></li>
+<li class="right"><a href="#about">About</a></li>
+</ul>
+<pre>
+<b>6796 5F30 7B11 0019 6914  61A1 2463 834F FD2C BDBB</b>  [<a href="keys/dashezup-pubkey.asc">DL</a>]
+--------------------------------------------------
+
+I use the encryption subkey and signing subkey to encrypt and sign my emails,
+and sign git commits with the signing subkey.
+
+pub   rsa4096 2020-06-21 [C] [expires: 2050-06-14]
+      67965F307B110019691461A12463834FFD2CBDBB
+uid                      Dash Eclipse &lt;&#x64;&#x61;&#x73;&#x68;&#x40;&#x65;&#x7A;&#x75;&#x70;&#x2E;&#x64;&#x65;&#x76;&gt;
+uid                      Dash Eclipse &lt;&#x64;&#x61;&#x73;&#x68;&#x65;&#x7A;&#x75;&#x70;&#x40;&#x64;&#x69;&#x73;&#x72;&#x6F;&#x6F;&#x74;&#x2E;&#x6F;&#x72;&#x67;&gt;
+sub   rsa4096 2020-06-21 [S] [expires: 2020-07-21]
+      2D89245E3A1CA0A6C2227A7D1C376E4C5C004BE2
+sub   rsa4096 2020-06-21 [E] [expires: 2020-07-21]
+      4C565DC92AF11EB5B30D626A98CCFFE81DD5E34E
+
+
+<b>1084 CEB0 AFC0 F003 132F  8F60 4802 C6B3 7F40 927D</b>  [<a href="https://api.protonmail.ch/pks/lookup?op=get&amp;search=&#x64;&#x61;&#x73;&#x68;&#x65;&#x7A;&#x75;&#x70;&#x40;&#x70;&#x72;&#x6F;&#x74;&#x6F;&#x6E;&#x6D;&#x61;&#x69;&#x6C;&#x2E;&#x63;&#x6F;&#x6D;">DL</a>]
+--------------------------------------------------
+
+The key I use on ProtonMail, you may encrypt your emails with this key
+when you send emails from non-ProtonMail services to my ProtonMail address.
+
+pub   rsa2048 2020-06-17 [SC]
+      1084CEB0AFC0F003132F8F604802C6B37F40927D
+uid           &#x64;&#x61;&#x73;&#x68;&#x65;&#x7A;&#x75;&#x70;&#x40;&#x70;&#x72;&#x6F;&#x74;&#x6F;&#x6E;&#x6D;&#x61;&#x69;&#x6C;&#x2E;&#x63;&#x6F;&#x6D; &lt;&#x64;&#x61;&#x73;&#x68;&#x65;&#x7A;&#x75;&#x70;&#x40;&#x70;&#x72;&#x6F;&#x74;&#x6F;&#x6E;&#x6D;&#x61;&#x69;&#x6C;&#x2E;&#x63;&#x6F;&#x6D;&gt;
+sub   rsa2048 2020-06-17 [E]
+</pre></div>
+<div id="about">
+<ul class="topnav">
+<li class="home"><a href="#dash">ezup.dev</a></li>
+<li><a href="/blog">Blog</a></li>
+<li><a href="#pgp">PGP</a></li>
+<li><a href="git/" target="_blank"><u>Git</u></a></li>
+<li class="right"><a class="active" href="#about">About</a></li>
+</ul>
+<pre>
+<b>About Dash Eclipse</b>
+------------------
+
+Dash Eclipse is an open source enthusiast.
+
+<a href="https://gitlab.com/dashezup" target=
+"_blank">GitLab</a> | <a href="https://github.com/dashezup" target=
+"_blank">GitHub</a> | <a href="#pgp">Emails</a>
+
+<i>Editors</i>:           Vim, GNU Emacs
+<i>OS</i>:                Hackintosh, Void Linux (musl)
+<i>Keyboard Layouts</i>:  <a href=
+"https://www.kaufmann.no/roland/dvorak/" target=
+"_blank">Programmer Dvorak</a>, Right-handed Dvorak, <a href=
+"http://sangaline.com/post/finding-an-optimal-keyboard-layout-for-swype/"
+target="_blank">Sangaline</a>
+<i>Browser</i>:           Firefox, Chromium
+<i>Password manager</i>:  <a href="https://www.passwordstore.org/"
+target="_blank">pass</a>
+
+
+<b>About the Website</b>
+-----------------
+
+<a href="git/ezup.dev/" target=
+"_blank">Source Code of Dash Eclipse's Personal Site</a> by Dash Eclipse
+
+To the extent possible under law, the person who associated CC0 with
+Dash Eclipse has waived all copyright and related or neighboring rights
+to Source Code of Dash Eclipse's Personal Site.
+
+You should have received a copy of the CC0 legalcode along with this
+work.  If not, see &lt;http://creativecommons.org/publicdomain/zero/1.0/&gt;.
+</pre></div>
+<div id="dash">
+<ul class="topnav">
+<li class="home"><a class="active" href="#dash">ezup.dev</a></li>
+<li><a href="/blog">Blog</a></li>
+<li><a href="#pgp">PGP</a></li>
+<li><a href="git/" target="_blank"><u>Git</u></a></li>
+<li class="right"><a href="#about">About</a></li>
+</ul>
+<pre><b>
+Dash Eclipse</b>'s Personal Site (ezup.dev)
+---------------------------------------
+
+<b>$ neofetch</b> -L
+                __.;=====;.__
+            _.=+==++=++=+=+===;.
+             -=+++=+===+=+=+++++=_
+        .     -=:``     `--==+=++==.
+       _vi,    `            --+=++++:
+      .uvnvi.       _._       -==+==+.
+     .vvnvnI`    .;==|==;.     :|=||=|.
++QmQQmpvvnv; _yYsyQQWUUQQQm #QmQ#:QQQWUV$QQm.
+ -QQWQWpvvowZ?.wQQQE==&lt;QWWQ/QWQW.QQWW(: jQWQE
+  -$QQQQmmU'  jQQQ@+=&lt;QWQQ)mQQQ.mQQQC+;jWQQ@'
+   -$WQ8YnI:   QWQQwgQQWV`mWQQ.jQWQQgyyWW@!
+     -1vvnvv.     `~+++`        ++|+++
+      +vnvnnv,                 `-|===
+       +vnvnvns.           .      :=-
+        -Invnvvnsi..___..=sv=.     `
+          +Invnvnvnnnnnnnnvvnn;.
+            ~|Invnvnvvnvvvnnv}+`
+               -~|{*l}*|~
+
+
+<b>$ neofetch</b> --off --color_blocks off
+dash@ezup-c201
+--------------
+OS: Void Linux armv7l
+Host: Google Speedy
+Kernel: 5.1.0
+Uptime: secs
+Packages: 603 (xbps-query)
+Shell: zsh 5.8
+Resolution: 1366x768
+WM: dwm
+Theme: Raleigh [GTK2/3]
+Icons: Paper-Mono-Dark [GTK2/3]
+Terminal: st
+Terminal Font: Fira Code Medium
+CPU: Rockchip (Device Tree) (4) @ 1.800GHz
+Memory: 82MiB / 2005MiB
+
+<b>$ _</b></pre></div>
+</body>
+</html>

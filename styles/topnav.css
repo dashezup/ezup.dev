@@ -1,0 +1,59 @@
+@font-face {
+  font-family: Clear Sans;
+  src: url(/fonts/ClearSans-Regular.woff2);
+}
+body {
+  margin: 0;
+}
+/* Responsive Topnav https://www.w3schools.com/css/css_navbar_horizontal.asp */
+ul.topnav {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  line-height: 0.9em;
+}
+ul.topnav li {
+  float: left;
+  text-align: center;
+  margin: 0;
+}
+ul.topnav li a {
+  font-family: 'Clear Sans', sans-serif;
+  display: block;
+  color: gray;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.8em 0.6em 0.6em 0.6em;
+}
+ul.topnav li a:hover:not(.active) {
+  color: #757575;
+  border-bottom: 3px solid #bdbdbd;
+}
+ul.topnav li a.active {
+  color: #757575;
+  border-bottom: 0.2em solid #757575;
+}
+ul.topnav li.right {
+  float: right;
+}
+@media screen and (max-width: 610px) {
+/*   ul.topnav li.right, */
+/*   ul.topnav li {float: none;} */
+  ul.topnav {line-height: 1.2em;}
+  ul.topnav li.home {width: 26.2%;}
+  ul.topnav li {width: 17.5%;}
+  ul.topnav li.right {width: 21.3%;}
+  ul.topnav li a {font-size: 20px;}
+}
+@media screen and (min-width: 610px) {
+  ul.topnav li {padding: 0 0.3em; width: 100px;}
+  ul.topnav li.home {padding: 0 1.8em 0 1.8em;}
+  ul.topnav li.right {padding: 0 1em 0 0;}
+  ul.topnav li a {font-size: 21px;}
+}
