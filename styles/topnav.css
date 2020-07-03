@@ -42,7 +42,7 @@ ul.topnav li a.active {
 ul.topnav li.right {
   float: right;
 }
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 609px) {
 /*   ul.topnav li.right, */
 /*   ul.topnav li {float: none;} */
   ul.topnav {line-height: 1.2em;}

@@ -22,14 +22,17 @@ pre {margin-left:2em;margin-top:2em;}
 pre a:link {color:black;background-color:white;}
 pre a:visited {color:black;background-color:white;}
 pre a:hover {color:black;background-color:white}
-@media screen and (max-width: 600px) {
-  pre {
-    margin-left: 0.5em;
-    margin-top: 1em;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    text-align: justify;
-  }
+@media only screen and (min-width: 360px) {
+  pre {margin:0.9em 0 0 0.9em;font-size: 12px;}
+}
+@media only screen and (min-width: 480px) {
+  pre {margin:1.3em 0 0 1.3em;font-size: 15.9px;}
+}
+@media only screen and (min-width: 610px) {
+  pre { margin:1.5em 0 0 1.5em;font-size:16px;}
+}
+@media only screen and (min-width: 800px) {
+  pre { margin:1.5em 0 0 1.7em;font-size:17px;}
 }
 </style>
 </head>
@@ -121,8 +124,7 @@ work.  If not, see &lt;http://creativecommons.org/publicdomain/zero/1.0/&gt;.
 <li><a href="git/" target="_blank"><u>Git</u></a></li>
 <li class="right"><a href="#about">About</a></li>
 </ul>
-<pre><b>
-Dash Eclipse</b>'s Personal Site (ezup.dev)
+<pre><b>Dash Eclipse</b>'s Personal Site (ezup.dev)
 ---------------------------------------
 
 <b>$ neofetch</b> -L
