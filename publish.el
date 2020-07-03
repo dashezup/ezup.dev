@@ -131,6 +131,7 @@ PROJECT is the current project."
              (insert (format "* %s\n" title))
              (org-set-property "RSS_PERMALINK" link)
              (org-set-property "PUBDATE" date)
+	     ;;(insert-file-contents file)
              (buffer-string))))
         ((eq style 'tree)
          ;; Return only last subdir.

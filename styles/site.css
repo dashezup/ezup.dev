@@ -21,15 +21,18 @@ body {
     padding: 0px 15px 0px 15px;
   }
   h1.title {
-    margin-top: 25px;
-    font-size: 30px;
+    margin-top: 0.7em;
+    font-size: 32px;
+  }
+  p.subtitle {
+    font-size: 22px;
   }
   body section.outline-2 h2 {
-    margin-top: 20px;
+    margin-top: 5px;
     font-size: 23px;
   }
   body h3 {
-  font-size: 19px;
+  font-size: 5px;
   margin-top: 21px;
   font-weight: bold;
   }
@@ -42,19 +45,21 @@ body {
     font-size: 18px;
   }
 }
+p.subtitle {
+  font-size: 17px;
+  margin-top: 1em;
+  margin-bottom: 1.4em;
+}
 h2.footnotes {
   font-weight: bold;
   font-size: 30px;
-  margin-bottom: 13px;
+  margin-bottom: 5px;
 }
 p.footpara {
   line-height: 25px;
 }
 #text-footnotes {
   line-height: 0.6;
-}
-body h1 {
-  font-weight: bold;
 }
 body h2,
 body h3,
@@ -80,17 +85,18 @@ body h4 img {
   border: 0 none;
 }
 body h1 {
-  font-size: 42px;
-  margin-top: 37px;
+  font-size: 41px;
+  margin-top: 0.8em;
+  font-weight: bold;
 }
 body h2 {
-  margin-top: 60px;
+  margin-top: 0.9em;
   position: relative;
-  font-size: 32px;
+  font-size: 35px;
 }
 body h3 {
-  font-size: 22px;
-  margin-top: 40px;
+  font-size: 23px;
+  margin-top: 1em;
   font-weight: bold;
 }
 body p {
@@ -108,7 +114,7 @@ body pre {
   background: white;
 }
 body pre.src {
-/*   overflow-y: auto !important; */
+  overflow-y: auto !important;
   font-size: 16px;
 }
 body code {

@@ -33,15 +33,15 @@ pre {
 pre.src {
   position: relative;
   overflow: visible;
-  padding-top: 1.2em;
+  padding: 0.5em 0 0.5em 0.9em;
 }
 pre.src:before {
   display: none;
   position: absolute;
   background-color: white;
-  top: -10px;
-  right: 10px;
-  padding: 3px;
+  top: 0px;
+  right: 0px;
+  padding: 2px;
   border: 1px solid black;
 }
 pre.src:hover:before { display: inline;}
@@ -150,7 +150,7 @@ td.org-left   { text-align: left;   }
 td.org-center { text-align: center; }
 dt { font-weight: bold; }
 .footpara { display: inline; }
-.footdef  { margin-bottom: 1em; }
+.footdef  { margin-bottom: 0.5em; }
 .figure { padding: 1em; }
 .figure p { text-align: center; }
 .inlinetask {

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-07-03 Fri 15:28 -->
+<!-- 2020-07-03 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenPGP Key Generation and Usage</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="Dash Eclipse">
+<meta name="description" content="How do I generate OpenPGP keys and use it"
+>
 <meta name="keywords" content="openpgp, pgp, gnupg, gpg, subkey">
 <link rel='icon' type='image/x-icon' href='/favicon.svg'/>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -32,20 +34,20 @@
 <h1 class="title">OpenPGP Key Generation and Usage</h1>
 <p class="subtitle">Published on 2020-06-30 by Dash Eclipse.</p>
 </header><p>
-In this article I'm gonna explain how do I generate OpenPGP keys and use PGP.
+In this article I'm gonna explain how do I generate and use  OpenPGP keys.
 </p>
 
-<section id="outline-container-orgabbcd0c" class="outline-2">
-<h2 id="orgabbcd0c"><span class="section-number-2">1</span> Install GnuPG</h2>
+<section id="outline-container-orgead6916" class="outline-2">
+<h2 id="orgead6916"><span class="section-number-2">1</span> Install GnuPG</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-On macOS you can use brew to install GnuPG <code>brew install gnupg</code>
+On macOS you can use brew to install GnuPG <code>brew install gnupg</code>, you will also need <code>pinentry-mac</code> package if you are going to use it with GUI programs such like Thunderbird with Eng
 </p>
 </div>
 </section>
 
-<section id="outline-container-org46aaefe" class="outline-2">
-<h2 id="org46aaefe"><span class="section-number-2">2</span> OpenPGP key generation</h2>
+<section id="outline-container-org492070e" class="outline-2">
+<h2 id="org492070e"><span class="section-number-2">2</span> OpenPGP key generation</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Beside <code>gpg --full-generate-key</code>, you can also create a key with gpg in batch mode<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
@@ -82,8 +84,8 @@ gpg --batch --generate-key first-last.txt
 </div>
 </section>
 
-<section id="outline-container-org0736801" class="outline-2">
-<h2 id="org0736801"><span class="section-number-2">3</span> Use subkeys</h2>
+<section id="outline-container-orgc8405b6" class="outline-2">
+<h2 id="orgc8405b6"><span class="section-number-2">3</span> Use subkeys</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 I use encryption and signing subkeys instead of just use one key for everything, because it's safer when you keep your master key elsewhere and use different keys for different purposes. Debian also recommend to use subkeys.<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>
@@ -102,17 +104,60 @@ gpg --edit-key &lt;key-id&gt; passwd
 </pre>
 </div>
 </div>
+<div id="outline-container-orgde6e78a" class="outline-3">
+<h3 id="orgde6e78a"><span class="section-number-3">3.1</span> Thunderbird and Enigmail</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+I use Thunderbird with Enigmail to send and receive PGP encrypted emails, you can follow <a href="https://ssd.eff.org/en/module/how-use-pgp-mac-os-x">the guide by EFF SSD</a> to set it up. Note you need to install <code>pinentry-mac</code> the package to use GPG with such GUI programs.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">brew install pinentry-mac
+<span class="org-builtin">echo</span> <span class="org-string">'pinentry-program /usr/local/bin/pinentry-mac'</span> &gt; ~/.gnupg/gpg-agent.conf
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1392bdc" class="outline-3">
+<h3 id="org1392bdc"><span class="section-number-3">3.2</span> Git</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+<pre class="src src-sh">git config --global gpg.program $(<span class="org-builtin">which</span> gpg)
+git config --global user.name <span class="org-string">'First Last'</span>
+git config --global user.email <span class="org-string">'user@domain.tld'</span>
+git config --global user.signingkey &lt;signing_subkey_id&gt;
+git config --global commit.gpgsign true
+</pre>
+</div>
+<p>
+In case you don't want to sign commits for specific repo, just run <code>git config commit.gpgsign false</code> in the repo directory.
+</p>
+</div>
+</div>
+<div id="outline-container-org6305008" class="outline-3">
+<h3 id="org6305008"><span class="section-number-3">3.3</span> pass (the standard unix password manager)</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+I use <a href="https://www.passwordstore.org/">pass</a> to manage my passwords, with a different key. pass store passwords in a git repo, you can also store the <code>$GNUPGHOME</code> in a git repo or just in the same repo.
+I have some config like this in my zsh config <code>~/.zshrc.local</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-variable-name">PASSWORD_STORE_DIR</span>=<span class="org-string">"$HOME/passwordstore"</span>
+<span class="org-builtin">alias</span> <span class="org-variable-name">pass</span>=<span class="org-string">"GNUPGHOME=\"$HOME/passwordstore/.gnupg\" PASSWORD_STORE_DIR=\"$HOME/passwordstore\" pass"</span>
+</pre>
+</div>
+</div>
+</div>
 </section>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
-The GNU Privacy Guard Manual - <a href="https://www.gnupg.org/documentation//manuals/gnupg/Unattended-GPG-key-generation.html">4.5.4 Unattended key generation</a>
+<a href="https://www.gnupg.org/documentation//manuals/gnupg/Unattended-GPG-key-generation.html">4.5.4 Unattended key generation | The GNU Privacy Guard Manual</a>
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
-Debian Wiki - <a href="https://wiki.debian.org/Subkeys">Subkeys</a> 
+<a href="https://wiki.debian.org/Subkeys">Subkeys | Debian Wiki</a>
 </p></div></div>
 
 

@@ -3,15 +3,16 @@
 #+DATE: [2020-06-30 Tue]
 #+email: dash@ezup.dev
 #+KEYWORDS: openpgp, pgp, gnupg, gpg, subkey
+#+DESCRIPTION: How do I generate OpenPGP keys and use it
 
-In this article I'm gonna explain how do I generate OpenPGP keys and use PGP.
+In this article I'm gonna explain how do I generate and use  OpenPGP keys.
 
 * Install GnuPG
   :PROPERTIES:
   :ID:       22D75389-43AB-49A4-B998-B48AF2365397
   :PUBDATE:  <2020-07-02 Thu 21:30>
   :END:
-  On macOS you can use brew to install GnuPG ~brew install gnupg~
+  On macOS you can use brew to install GnuPG ~brew install gnupg~, you will also need ~pinentry-mac~ package if you are going to use it with GUI programs such like Thunderbird with Eng
 
 * OpenPGP key generation
   :PROPERTIES:
@@ -63,11 +64,29 @@ In this article I'm gonna explain how do I generate OpenPGP keys and use PGP.
     rm .gnupg/private-keys-v1.d/<keygrip>.key
     gpg --edit-key <key-id> passwd
   #+END_SRC
-
+** Thunderbird and Enigmail
+   I use Thunderbird with Enigmail to send and receive PGP encrypted emails, you can follow [[https://ssd.eff.org/en/module/how-use-pgp-mac-os-x][the guide by EFF SSD]] to set it up. Note you need to install ~pinentry-mac~ the package to use GPG with such GUI programs.
+   #+BEGIN_SRC sh
+     brew install pinentry-mac
+     echo 'pinentry-program /usr/local/bin/pinentry-mac' > ~/.gnupg/gpg-agent.conf
+   #+END_SRC
+** Git
+   #+BEGIN_SRC sh
+     git config --global gpg.program $(which gpg)
+     git config --global user.name 'First Last'
+     git config --global user.email 'user@domain.tld'
+     git config --global user.signingkey <signing_subkey_id>
+     git config --global commit.gpgsign true
+   #+END_SRC
+   In case you don't want to sign commits for specific repo, just run ~git config commit.gpgsign false~ in the repo directory.
+** pass (the standard unix password manager)
+   I use [[https://www.passwordstore.org/][pass]] to manage my passwords, with a different key. pass store passwords in a git repo, you can also store the ~$GNUPGHOME~ in a git repo or just in the same repo.
+   I have some config like this in my zsh config ~~/.zshrc.local~
+   #+BEGIN_SRC sh
+     PASSWORD_STORE_DIR="$HOME/passwordstore"
+     alias pass="GNUPGHOME=\"$HOME/passwordstore/.gnupg\" PASSWORD_STORE_DIR=\"$HOME/passwordstore\" pass"
+   #+END_SRC
 * Footnotes
-  :PROPERTIES:
-  :ID:       46766029-46E7-4ADD-9D10-38C588B2B53A
-  :PUBDATE:  <2020-07-02 Thu 21:30>
-  :END:
-[fn:1] The GNU Privacy Guard Manual - [[https://www.gnupg.org/documentation//manuals/gnupg/Unattended-GPG-key-generation.html][4.5.4 Unattended key generation]]
-[fn:2]  Debian Wiki - [[https://wiki.debian.org/Subkeys][Subkeys]] 
+
+[fn:1] [[https://www.gnupg.org/documentation//manuals/gnupg/Unattended-GPG-key-generation.html][4.5.4 Unattended key generation | The GNU Privacy Guard Manual]]
+[fn:2] [[https://wiki.debian.org/Subkeys][Subkeys | Debian Wiki]]
