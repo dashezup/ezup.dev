@@ -1,0 +1,3 @@
+#+AUTHOR: Dash Eclipse
+#+KEYWORDS: post
+#+HTML_DOCTYPE: xhtml-strict

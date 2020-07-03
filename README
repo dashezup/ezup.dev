@@ -1,0 +1,32 @@
+Source Code of Dash Eclipse's Personal Site (ezup.dev)
+------------------------------------------------------
+
+ezup.dev HTTPS server serve files under .web/
+
+
+Generate the website
+--------------------
+
+$ dash ./publish-ezup.sh
+
+
+License
+-------
+
+Source Code of Dash Eclipse's Personal Site by Dash Eclipse
+
+To the extent possible under law, the person who associated CC0 with
+Dash Eclipse has waived all copyright and related or neighboring rights
+to Source Code of Dash Eclipse's Personal Site.
+
+You should have received a copy of the CC0 legalcode along with this
+work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+blog/publish.el is my modified version of Sachin's
+psachin.gitlab.io/publish.el, it's licensed under GNU GPLv3.
+
+Files under blog/public/ and blog/posts/ are my blog posts which
+just like most of files in this repo are licensed under CC0.
+
+fonts/ClearSans-{Regular,Bold}.woff2 are Clear Sans font, it's converted
+from https://01.org/clear-sans and licensed under Apache 2.0.

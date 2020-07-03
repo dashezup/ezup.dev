@@ -1,0 +1,57 @@
+#+TITLE: OpenPGP Key Generation and Usage
+#+DATE: [2020-06-30 Tue]
+#+email: dash@ezup.dev
+#+KEYWORDS: openpgp, pgp, gnupg, gpg, subkey
+#+SETUPFILE: ../org-templates/post.org
+
+In this article I'm gonna explain how do I generate OpenPGP keys and use PGP.
+
+* Install GnuPG
+  On macOS you can use brew to install GnuPG ~brew install gnupg~
+
+* OpenPGP key generation
+  Beside ~gpg --full-generate-key~, you can also create a key with gpg in batch mode[fn:1].
+  #+BEGIN_SRC sh
+    cat >first-last.txt <<EOF
+    %echo Generating a basic OpenPGP key
+    Key-Type: RSA
+    Key-Length: 4096
+    Key-Usage: cert
+    #Subkey-Type: RSA
+    #Subkey-Length: 4096
+    Name-Real: First Last
+    #Name-Comment:
+    Name-Email: user@domain.tld
+    Expire-Date: 30y
+    Passphrase: password
+    %commit
+    %echo done
+    EOF
+  #+END_SRC
+  Create a key in an ephemeral home directory
+  #+BEGIN_SRC sh
+    mkdir -m700 .gnupg
+    ## Set the environment variable
+    ## or pass --homedir .gnupg as an argument
+    export GNUPGHOME=".gnupg"
+    gpg --batch --generate-key first-last.txt
+  #+END_SRC
+
+* Use subkeys
+  I use encryption and signing subkeys instead of just use one key for everything, because it's safer when you keep your master key elsewhere and use different keys for different purposes. Debian also recommend to use subkeys.[fn:2]
+  #+BEGIN_SRC sh
+    ## adduid, (trust, 5,) save
+    gpg --edit-key user@domain.tld
+    ## Get keygrip
+    gpg --with-keygrip --list-key <key-id>
+    ## Export and Import the key to the GPG homedir
+    ## where you are gonna use the key,
+    ## remove the master key from there
+    ## and change the password
+    rm .gnupg/private-keys-v1.d/<keygrip>.key
+    gpg --edit-key <key-id> passwd
+  #+END_SRC
+
+* Footnotes
+[fn:1] The GNU Privacy Guard Manual - [[https://www.gnupg.org/documentation//manuals/gnupg/Unattended-GPG-key-generation.html][4.5.4 Unattended key generation]]
+[fn:2]  Debian Wiki - [[https://wiki.debian.org/Subkeys][Subkeys]] 
