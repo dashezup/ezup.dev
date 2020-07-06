@@ -74,7 +74,7 @@ returned by `org-list-to-lisp'."
     (concat "#+TITLE: " title "\n"
             ;"#+OPTIONS: title:nil\n"
             "#+META_TYPE: website\n"
-            "#+DESCRIPTION: Dash Eclipse' Personal Blog\n"
+            "#+DESCRIPTION: Dash Eclipse's Personal Blog\n"
             ;;"\n#+ATTR_HTML: :class sitemap\n"
             ; TODO use org-list-to-subtree instead
             (org-list-to-org list)))
