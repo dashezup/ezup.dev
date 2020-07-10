@@ -157,7 +157,7 @@
 
 ** Download void-live ISO and bootloaders
    - [[https://voidlinux.org/download/][void-live]], I use ~void-live-x86_64-musl-20191109.iso~
-   - [[https://www.rodsbooks.com/refind/][rEFInd]], I use ~refind~ the void package
+   - [[https://www.rodsbooks.com/refind/getting.html][rEFInd]], I use ~refind~ the void package
    - [[https://wiki.syslinux.org/wiki/index.php?title=Download][syslinux]], I use ~syslinux~ the void package
 
 ** Create the FAT32 filesystem and label it
