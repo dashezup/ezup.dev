@@ -1,8 +1,14 @@
 #+TITLE: Dash Eclipse's Blog | ezup.dev
 
+* FAT32 Partitionless Void Linux Live USB
+:PROPERTIES:
+:RSS_PERMALINK: fat32-partitionless-voidlinux-liveusb.html
+:PUBDATE:  2020-07-10
+:ID:       B63039DB-9E4B-45DD-81D4-05F1E27E0AC1
+:END:
 * OpenPGP Key Generation and Usage
 :PROPERTIES:
 :RSS_PERMALINK: pgp.html
 :PUBDATE:  2020-06-30
-:ID:       D1E13727-186F-460A-908C-1537350AE54B
+:ID:       B48C23A2-CD30-40C6-95DD-36B66FFDAACB
 :END:

@@ -145,7 +145,7 @@ PROJECT is the current project."
          :base-directory "posts"
          :recursive t
          ;;:section-numbers nil
-         :with-toc nil
+         ;;:with-toc nil
          :base-extension "org"
          :exclude "rss.org\\|index.org"
          ;:exclude ,(regexp-opt '("rss.org" "index.org"))

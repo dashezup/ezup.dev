@@ -45,6 +45,9 @@ body {
     font-size: 18px;
   }
 }
+div#text-table-of-contents ul li ul {
+  margin-top: 0.5em;
+}
 p.subtitle {
   font-size: 17px;
   margin-top: 1em;
@@ -126,7 +129,8 @@ body code {
   font-size: .9em;
 }
 body li {
-  margin-bottom: 1em;
+  margin-bottom: 0.6em;
+  line-height: 1;
 }
 body img {
   border: 1px solid #ccc;

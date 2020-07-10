@@ -1,5 +1,7 @@
 #+TITLE: Blog Index
 #+META_TYPE: website
 #+DESCRIPTION: Dash Eclipse's Personal Blog
+- [[file:fat32-partitionless-voidlinux-liveusb.org][FAT32 Partitionless Void Linux Live USB]]
+  #+html: <p class='pubdate'>by Dash Eclipse on Jul 10, 2020.</p>
 - [[file:pgp.org][OpenPGP Key Generation and Usage]]
   #+html: <p class='pubdate'>by Dash Eclipse on Jun 30, 2020.</p>

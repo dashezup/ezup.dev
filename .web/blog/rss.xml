@@ -14,8 +14,8 @@
   <link>https://ezup.dev/blog/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Thu, 09 Jul 2020 16:20:31 +0000</pubDate>
-  <lastBuildDate>Thu, 09 Jul 2020 16:20:31 +0000</lastBuildDate>
+  <pubDate>Fri, 10 Jul 2020 19:25:15 +0000</pubDate>
+  <lastBuildDate>Fri, 10 Jul 2020 19:25:15 +0000</lastBuildDate>
   <generator>Emacs 26.3 Org-mode 9.3.7</generator>
   <webMaster>dash@ezup.dev (Dash Eclipse)</webMaster>
   <image>
@@ -25,6 +25,15 @@
   </image>
 
 
+  <item>
+    <title>FAT32 Partitionless Void Linux Live USB</title>
+    <link>https://ezup.dev/blog/fat32-partitionless-voidlinux-liveusb.html</link>
+    <author>dash@ezup.dev (Dash Eclipse)</author>
+    <guid isPermaLink="false">https://ezup.dev/blog/fat32-partitionless-voidlinux-liveusb.html</guid>
+    <pubDate>Fri, 10 Jul 2020 00:00:00 +0000</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
   <item>
     <title>OpenPGP Key Generation and Usage</title>
     <link>https://ezup.dev/blog/pgp.html</link>
