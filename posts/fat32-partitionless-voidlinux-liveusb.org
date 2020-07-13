@@ -161,10 +161,9 @@
    - [[https://wiki.syslinux.org/wiki/index.php?title=Download][syslinux]], I use ~syslinux~ the void package
 
 ** Create the FAT32 filesystem and label it
-   Assume the USB Stick we are going to create LiveOS is ~/dev/sdc~
+   Assume the USB stick where we are going to create LiveOS is ~/dev/sdc~ and the FAT32 volume name is ~VOID_LIVE~, note the volume name should be identical as boot options specified in bootloader configuration files.
    #+BEGIN_SRC sh
-     sudo mkfs.vfat -I -F32 /dev/sdc
-     sudo fatlabel /dev/sdc VOID_LIVE
+     sudo mkfs.vfat -I -F32 -n VOID_LIVE /dev/sdc
      mkdir VOID_LIVE
      sudo mount /dev/sdc VOID_LIVE
    #+END_SRC
@@ -199,9 +198,11 @@
      sudo xbps-install -S syslinux
      sudo mkdir VOID_LIVE/syslinux
      sudo cp /usr/lib/syslinux/{chain,libcom32,libutil,vesamenu}.c32 VOID_LIVE/syslinux
+     sudo extlinux --install VOID_LIVE/syslinux
      sudo vim VOID_LIVE/syslinux/syslinux.cfg
      sudo umount VOID_LIVE
-     sudo syslinux --directory syslinux --install /dev/sdc
+     ## Or use syslinux command instead extlinux when the device is umounted
+     #sudo syslinux --directory syslinux --install /dev/sdc
    #+END_SRC
 
 * Footnotes

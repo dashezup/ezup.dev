@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-07-10 -->
+<!-- 2020-07-13 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FAT32 Partitionless Void Linux Live USB</title>
@@ -37,28 +37,28 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org54e6efb">1. What is this about and why do I create Live USB this way</a>
+<li><a href="#org583e609">1. What is this about and why do I create Live USB this way</a>
 <ul>
-<li><a href="#orga3ec0e0">1.1. Advantages</a></li>
-<li><a href="#org7bc5c8d">1.2. How does this works and works for both UEFI and Legacy BIOS?</a></li>
+<li><a href="#org89e0f8c">1.1. Advantages</a></li>
+<li><a href="#org7bc8fc8">1.2. How does this works and works for both UEFI and Legacy BIOS?</a></li>
 </ul>
 </li>
-<li><a href="#org8e6c790">2. Layout and Bootloader configuration files</a></li>
-<li><a href="#org4ebd9a7">3. Create FAT32 Partitionless Void Linux Live USB</a>
+<li><a href="#org820b64e">2. Layout and Bootloader configuration files</a></li>
+<li><a href="#org21ef77a">3. Create FAT32 Partitionless Void Linux Live USB</a>
 <ul>
-<li><a href="#org29ebf06">3.1. Download void-live ISO and bootloaders</a></li>
-<li><a href="#org857fb39">3.2. Create the FAT32 filesystem and label it</a></li>
-<li><a href="#org9b4cf69">3.3. Grab files from void-live ISO</a></li>
-<li><a href="#org8a31d2f">3.4. rEFInd for UEFI</a></li>
-<li><a href="#org2ade283">3.5. syslinux for Legacy BIOS</a></li>
+<li><a href="#orgd05d3a2">3.1. Download void-live ISO and bootloaders</a></li>
+<li><a href="#org29f9b38">3.2. Create the FAT32 filesystem and label it</a></li>
+<li><a href="#orgfe63804">3.3. Grab files from void-live ISO</a></li>
+<li><a href="#org895b983">3.4. rEFInd for UEFI</a></li>
+<li><a href="#orge0f7187">3.5. syslinux for Legacy BIOS</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<section id="outline-container-org54e6efb" class="outline-2">
-<h2 id="org54e6efb"><span class="section-number-2">1</span> What is this about and why do I create Live USB this way</h2>
+<section id="outline-container-org583e609" class="outline-2">
+<h2 id="org583e609"><span class="section-number-2">1</span> What is this about and why do I create Live USB this way</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 I use void-live as my Live USB because it supports booting into RAM, so I can eject USB stick after boot into LiveOS. And Void Linux provides a set of scripts<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> to generate the iso, it's pretty easy to customize it and it just works.
@@ -73,8 +73,8 @@ The solution is pretty simple, just create one FAT32 filesystem on the USB stick
 </p>
 </div>
 
-<div id="outline-container-orga3ec0e0" class="outline-3">
-<h3 id="orga3ec0e0"><span class="section-number-3">1.1</span> Advantages</h3>
+<div id="outline-container-org89e0f8c" class="outline-3">
+<h3 id="org89e0f8c"><span class="section-number-3">1.1</span> Advantages</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Works for both UEFI and Legacy BIOS</li>
@@ -87,8 +87,8 @@ The solution is pretty simple, just create one FAT32 filesystem on the USB stick
 </div>
 </div>
 
-<div id="outline-container-org7bc5c8d" class="outline-3">
-<h3 id="org7bc5c8d"><span class="section-number-3">1.2</span> How does this works and works for both UEFI and Legacy BIOS?</h3>
+<div id="outline-container-org7bc8fc8" class="outline-3">
+<h3 id="org7bc8fc8"><span class="section-number-3">1.2</span> How does this works and works for both UEFI and Legacy BIOS?</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 It's pretty simple, just install the bootloader, configure it to load <code>vmlinuz</code> the linux kernel and <code>initrd</code> the initramfs and it will load <code>LiveOS/squashfs.img</code> from the FAT32 filesystem which labeled as <code>VOID_​LIVE</code>.
@@ -109,8 +109,8 @@ For Legacy BIOS, when you have a partition table on the hard drive, you need to 
 </div>
 </section>
 
-<section id="outline-container-org8e6c790" class="outline-2">
-<h2 id="org8e6c790"><span class="section-number-2">2</span> Layout and Bootloader configuration files</h2>
+<section id="outline-container-org820b64e" class="outline-2">
+<h2 id="org820b64e"><span class="section-number-2">2</span> Layout and Bootloader configuration files</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Layout
@@ -242,12 +242,12 @@ LABEL voidram
 </div>
 </section>
 
-<section id="outline-container-org4ebd9a7" class="outline-2">
-<h2 id="org4ebd9a7"><span class="section-number-2">3</span> Create FAT32 Partitionless Void Linux Live USB</h2>
+<section id="outline-container-org21ef77a" class="outline-2">
+<h2 id="org21ef77a"><span class="section-number-2">3</span> Create FAT32 Partitionless Void Linux Live USB</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org29ebf06" class="outline-3">
-<h3 id="org29ebf06"><span class="section-number-3">3.1</span> Download void-live ISO and bootloaders</h3>
+<div id="outline-container-orgd05d3a2" class="outline-3">
+<h3 id="orgd05d3a2"><span class="section-number-3">3.1</span> Download void-live ISO and bootloaders</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li><a href="https://voidlinux.org/download/">void-live</a>, I use <code>void-live-x86_64-musl-20191109.iso</code></li>
@@ -257,15 +257,14 @@ LABEL voidram
 </div>
 </div>
 
-<div id="outline-container-org857fb39" class="outline-3">
-<h3 id="org857fb39"><span class="section-number-3">3.2</span> Create the FAT32 filesystem and label it</h3>
+<div id="outline-container-org29f9b38" class="outline-3">
+<h3 id="org29f9b38"><span class="section-number-3">3.2</span> Create the FAT32 filesystem and label it</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
-Assume the USB Stick we are going to create LiveOS is <code>/dev/sdc</code>
+Assume the USB stick where we are going to create LiveOS is <code>/dev/sdc</code> and the FAT32 volume name is <code>VOID_LIVE</code>, note the volume name should be identical as boot options specified in bootloader configuration files.
 </p>
 <div class="org-src-container">
-<pre class="src src-sh">sudo mkfs.vfat -I -F32 /dev/sdc
-sudo fatlabel /dev/sdc VOID_LIVE
+<pre class="src src-sh">sudo mkfs.vfat -I -F32 -n VOID_LIVE /dev/sdc
 mkdir VOID_LIVE
 sudo mount /dev/sdc VOID_LIVE
 </pre>
@@ -273,8 +272,8 @@ sudo mount /dev/sdc VOID_LIVE
 </div>
 </div>
 
-<div id="outline-container-org9b4cf69" class="outline-3">
-<h3 id="org9b4cf69"><span class="section-number-3">3.3</span> Grab files from void-live ISO</h3>
+<div id="outline-container-orgfe63804" class="outline-3">
+<h3 id="orgfe63804"><span class="section-number-3">3.3</span> Grab files from void-live ISO</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Assume we are using <code>void-live-x86_64-musl-20191109.iso</code>
@@ -292,8 +291,8 @@ sudo cp void-live-x86_64-musl-20191109/boot/isolinux/splash.png VOID_LIVE/syslin
 </div>
 </div>
 
-<div id="outline-container-org8a31d2f" class="outline-3">
-<h3 id="org8a31d2f"><span class="section-number-3">3.4</span> rEFInd for UEFI</h3>
+<div id="outline-container-org895b983" class="outline-3">
+<h3 id="org895b983"><span class="section-number-3">3.4</span> rEFInd for UEFI</h3>
 <div class="outline-text-3" id="text-3-4">
 <div class="org-src-container">
 <pre class="src src-sh">sudo xbps-install -S refind
@@ -310,16 +309,18 @@ sudo cp VOID_LIVE/{refind,BOOT}/refind.conf
 </div>
 </div>
 
-<div id="outline-container-org2ade283" class="outline-3">
-<h3 id="org2ade283"><span class="section-number-3">3.5</span> syslinux for Legacy BIOS</h3>
+<div id="outline-container-orge0f7187" class="outline-3">
+<h3 id="orge0f7187"><span class="section-number-3">3.5</span> syslinux for Legacy BIOS</h3>
 <div class="outline-text-3" id="text-3-5">
 <div class="org-src-container">
 <pre class="src src-sh">sudo xbps-install -S syslinux
 sudo mkdir VOID_LIVE/syslinux
 sudo cp /usr/lib/syslinux/{chain,libcom32,libutil,vesamenu}.c32 VOID_LIVE/syslinux
+sudo extlinux --install VOID_LIVE/syslinux
 sudo vim VOID_LIVE/syslinux/syslinux.cfg
 sudo umount VOID_LIVE
-sudo syslinux --directory syslinux --install /dev/sdc
+<span class="org-comment-delimiter">## </span><span class="org-comment">Or use syslinux command instead extlinux when the device is umounted</span>
+<span class="org-comment-delimiter">#</span><span class="org-comment">sudo syslinux --directory syslinux --install /dev/sdc</span>
 </pre>
 </div>
 </div>
