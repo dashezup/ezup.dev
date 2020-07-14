@@ -1,11 +1,11 @@
-#+TITLE: OpenPGP Key Generation and Usage
+#+TITLE: Create and Use OpenPGP Keys
 #+AUTHOR: Dash Eclipse
 #+DATE: [2020-06-30 Tue]
 #+KEYWORDS: openpgp, pgp, gnupg, gpg, subkey
 #+DESCRIPTION: How do I generate OpenPGP keys and use it
 #+OPTIONS: toc:nil
 
-In this article I'm gonna explain how do I generate and use  OpenPGP keys.
+In this article I'm gonna explain how do I generate and use OpenPGP keys.
 
 * Install GnuPG
   :PROPERTIES:

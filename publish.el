@@ -56,7 +56,7 @@ PLIST contains the properties, FILENAME the source file and
   PUB-DIR the output directory."
   (let ((project (cons 'ezup plist)))
     (plist-put plist :subtitle
-               (format "Published on %s by %s."
+               (format "Published on %s by %s"
                        (format-time-string "%Y-%m-%d" (org-publish-find-date filename project))
                        (plist-get plist :author)))
     (org-html-publish-to-html plist filename pub-dir)))

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-07-13 -->
+<!-- 2020-07-14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FAT32 Partitionless Void Linux Live USB</title>
@@ -32,36 +32,34 @@
 <main id="content">
 <header>
 <h1 class="title">FAT32 Partitionless Void Linux Live USB</h1>
-<p class="subtitle">Published on 2020-07-10 by Dash Eclipse.</p>
+<p class="subtitle">Published on 2020-07-14 by Dash Eclipse</p>
 </header><nav id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org583e609">1. What is this about and why do I create Live USB this way</a>
+<li><a href="#orga3e0658">1. What is this about and why do I create Live USB this way</a>
 <ul>
-<li><a href="#org89e0f8c">1.1. Advantages</a></li>
-<li><a href="#org7bc8fc8">1.2. How does this works and works for both UEFI and Legacy BIOS?</a></li>
+<li><a href="#org39d5497">1.1. Advantages</a></li>
+<li><a href="#orgd5d4403">1.2. How does it work?</a></li>
 </ul>
 </li>
-<li><a href="#org820b64e">2. Layout and Bootloader configuration files</a></li>
-<li><a href="#org21ef77a">3. Create FAT32 Partitionless Void Linux Live USB</a>
+<li><a href="#org72c32c9">2. FAT32 filesystem creation and file directory structure</a></li>
+<li><a href="#orgbd47abe">3. UEFI</a></li>
+<li><a href="#orgecbc6cb">4. Legacy BIOS</a>
 <ul>
-<li><a href="#orgd05d3a2">3.1. Download void-live ISO and bootloaders</a></li>
-<li><a href="#org29f9b38">3.2. Create the FAT32 filesystem and label it</a></li>
-<li><a href="#orgfe63804">3.3. Grab files from void-live ISO</a></li>
-<li><a href="#org895b983">3.4. rEFInd for UEFI</a></li>
-<li><a href="#orge0f7187">3.5. syslinux for Legacy BIOS</a></li>
+<li><a href="#orgcf2ba9a">4.1. Minimal config</a></li>
+<li><a href="#org68c5cce">4.2. Graphical boot menu</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<section id="outline-container-org583e609" class="outline-2">
-<h2 id="org583e609"><span class="section-number-2">1</span> What is this about and why do I create Live USB this way</h2>
+<section id="outline-container-orga3e0658" class="outline-2">
+<h2 id="orga3e0658"><span class="section-number-2">1</span> What is this about and why do I create Live USB this way</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-I use void-live as my Live USB because it supports booting into RAM, so I can eject USB stick after boot into LiveOS. And Void Linux provides a set of scripts<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> to generate the iso, it's pretty easy to customize it and it just works.
+I use void-live as my Live USB because it supports booting into RAM, so I can eject USB stick after boot into LiveOS. And it's esay to use void-mklive to generate customized iso, it's simple and just works.
 </p>
 
 <p>
@@ -69,26 +67,26 @@ But I don't want to use <code>dd</code> to write iso to my USB stick each time I
 </p>
 
 <p>
-The solution is pretty simple, just create one FAT32 filesystem on the USB stick, install bootloaders and copy LiveOS to it, and then configure the bootloader to boot the LiveOS.
+The solution is pretty simple, just create one FAT32 filesystem on the USB stick without any partition table, install bootloaders and copy LiveOS to it, and then configure the bootloader to boot the LiveOS.
 </p>
 </div>
 
-<div id="outline-container-org89e0f8c" class="outline-3">
-<h3 id="org89e0f8c"><span class="section-number-3">1.1</span> Advantages</h3>
+<div id="outline-container-org39d5497" class="outline-3">
+<h3 id="org39d5497"><span class="section-number-3">1.1</span> Advantages</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Works for both UEFI and Legacy BIOS</li>
 <li>Maximally use the storage, everything in one filesystem</li>
 <li>Could still use the USB stick for storing files as noraml</li>
 <li>Easy to delete the LiveOS from the USB stick, just remove these files</li>
-<li>Simple and just works, no dirty hacks, no need for loading iso files</li>
-<li>No need to install boot code</li>
+<li>Simple and just works, no dirty hacks, no need to load iso files</li>
+<li>No need to install boot code<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org7bc8fc8" class="outline-3">
-<h3 id="org7bc8fc8"><span class="section-number-3">1.2</span> How does this works and works for both UEFI and Legacy BIOS?</h3>
+<div id="outline-container-orgd5d4403" class="outline-3">
+<h3 id="orgd5d4403"><span class="section-number-3">1.2</span> How does it work?</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 It's pretty simple, just install the bootloader, configure it to load <code>vmlinuz</code> the linux kernel and <code>initrd</code> the initramfs and it will load <code>LiveOS/squashfs.img</code> from the FAT32 filesystem which labeled as <code>VOID_​LIVE</code>.
@@ -99,130 +97,110 @@ Just install bootloaders for UEFI and Legacy BIOS, I choose rEFInd for UEFI and 
 </p>
 
 <p>
-For UEFI, a FAT32 filesystem is necessary for loading a boot manager or bootloader, the FAT32 filesystem does not necessarily to be inside a GPT or MBR partition table, it could on the whole device without any partition table (a.k.a. partitionless).
+For UEFI, a FAT32 filesystem is necessary for loading a boot manager or bootloader, the FAT32 filesystem does not necessarily need to be inside a GPT or MBR partition table, it could on the whole device without any partition table (a.k.a. partitionless).
 </p>
 
 <p>
-For Legacy BIOS, when you have a partition table on the hard drive, you need to install the boot code to the device to be able to boot from it, and the partition which contains the bootloader should be marked as <b>active</b>. But you don't need to install boot code for a partitionless setup<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>, it just boots from the filesystem.
+For Legacy BIOS, when you have a partition table on the hard drive, you need to install the boot code to the device to be able to boot from it, and the partition which contains the bootloader should be marked as <b>active</b>. But you don't need to install boot code for a partitionless setup<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>, it just boots from the filesystem.
 </p>
 </div>
 </div>
 </section>
 
-<section id="outline-container-org820b64e" class="outline-2">
-<h2 id="org820b64e"><span class="section-number-2">2</span> Layout and Bootloader configuration files</h2>
+<section id="outline-container-org72c32c9" class="outline-2">
+<h2 id="org72c32c9"><span class="section-number-2">2</span> FAT32 filesystem creation and file directory structure</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Layout
+Assume the USB stick where we are going to create Live USB on is <code>/dev/sdc</code> and the FAT32 volume name is <code>VOID_LIVE</code>, you can create it with this command. Note the volume name can be other value but must be identical as boot options specified in bootloader configuration files.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">sudo mkfs.vfat -I -F32 -n VOID_LIVE /dev/sdc
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><code>LiveOS/</code> linux kernel, initramfs and LiveOS from void-live <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></li>
+<li><code>EFI/</code> rEFInd stuff for UEFI boot</li>
+<li><code>syslinux/</code> syslinux stuff for legacy BIOS boot</li>
+</ul>
+<p>
+Boot options can be found in <code>boot/isolinux/isolinux.cfg</code> or <code>boot/grub/grub_void.cfg</code> from void-live iso.
 </p>
 <pre style="line-height:1;">
-VOID_LIVE                -> # mkfs.vfat, fatlabel
+VOID_LIVE
 ├── EFI
-│   ├── BOOT
-│   │   ├── BOOTX64.EFI  -> ../refind/refind_x64.efi
-│   │   └── refind.conf  -> ../refind/refind.conf
-│   └── refind
-│     ├── icons          -> [refind]
-│     │   └── ...
-│     ├── refind_x64.efi -> [refind]
-│     ├── refind.conf
-│     └── themes
-│         └── refind-theme-regular -> [github] munlik/refind-theme-regular
-│             └── ...
+│   ├── BOOT
+│   │   ├── BOOTX64.EFI
+│   │   └── refind.conf
+│   └── refind
+│       ├── refind.conf
+│       └── refind_x64.efi
 ├── LiveOS
-│   ├── initrd           -> [iso] boot/initrd
-│   ├── squashfs.img     -> [iso]
-│   └── vmlinuz          -> [iso] boot/vmlinuz
+│   ├── initrd
+│   ├── squashfs.img
+│   └── vmlinuz
 └── syslinux
-    ├── chain.c32        -> [syslinux]
-    ├── ldlinux.c32      -> # syslinux
-    ├── ldlinux.sys      -> # syslinux
-    ├── libcom32.c32     -> [syslinux]
-    ├── libutil.c32      -> [syslinux]
-    ├── splash.png       -> [iso] boot/isolinux/splash.png
-    ├── syslinux.cfg     -> [iso] boot/isolinux/isolinux.cfg*
-    └── vesamenu.c32     -> [syslinux]
+    ├── ldlinux.c32
+    ├── ldlinux.sys
+    └── syslinux.cfg
 
-[iso]      -> void-live-x86_64{,-musl}-*.iso
-[refind]   -> /usr/share/refind
-[syslinux] -> /usr/lib/syslinux
+5 directories, 10 files
 </pre>
+</div>
+</section>
+
+<section id="outline-container-orgbd47abe" class="outline-2">
+<h2 id="orgbd47abe"><span class="section-number-2">3</span> UEFI</h2>
+<div class="outline-text-2" id="text-3">
 <p>
-My <code>VOID_LIVE/refind/refind.conf</code>
+I use rEFInd Boot Manager for UEFI boot, you can just download it from <a href="https://www.rodsbooks.com/refind/getting.html">the official website</a> and copy it to the FAT32 filesystem, or install <code>refind</code> the voidlinux package and then copy it from <code>/usr/share/refind</code>. It looks better with themes such like <a href="https://github.com/munlik/refind-theme-regular">refind-theme-regular</a>. You are free to customize it.
+</p>
+
+<p>
+<code>EFI/{BOOT,refind}/refind.conf</code>
 </p>
 <pre class="example">
 timeout 20
-#hideui hints
-#dont_scan_volumes VOID_LIVE
-resolution 1920 1080
-
-## refind-theme-regular
-#include /EFI/refind/themes/refind-theme-regular/theme.conf
-icons_dir /EFI/refind/themes/refind-theme-regular/icons/128-48
-big_icon_size 128
-small_icon_size 48
-banner /EFI/refind/themes/refind-theme-regular/icons/128-48/bg.png
-selection_big /EFI/refind/themes/refind-theme-regular/icons/128-48/selection-big.png
-selection_small /EFI/refind/themes/refind-theme-regular/icons/128-48/selection-small.png
-font /EFI/refind/themes/refind-theme-regular/fonts/source-code-pro-extralight-14.png
 
 menuentry "Void Linux (x86_64-musl)" {
-    icon /EFI/refind/icons/os_void.png
     loader LiveOS/vmlinuz
     initrd /LiveOS/initrd
     options "root=live:CDLABEL=VOID_LIVE ro init=/sbin/init rd.luks=0 rd.md=0 rd.dm=0 loglevel=4 gpt add_efi_memmap vconsole.unicode=1 vconsole.keymap=dvorak-programmer locale.LANG=en_US.UTF-8  rd.live.overlay.overlayfs=1"
-    #disabled
 }
 
 menuentry "Void Linux (x86_64-musl) (RAM)" {
-    icon /EFI/refind/icons/os_void.png
     loader LiveOS/vmlinuz
     initrd /LiveOS/initrd
     options "root=live:CDLABEL=VOID_LIVE ro init=/sbin/init rd.luks=0 rd.md=0 rd.dm=0 loglevel=4 gpt add_efi_memmap vconsole.unicode=1 vconsole.keymap=dvorak-programmer locale.LANG=en_US.UTF-8  rd.live.overlay.overlayfs=1  rd.live.ram"
-    #disabled
 }
 </pre>
+</div>
+</section>
+
+<section id="outline-container-orgecbc6cb" class="outline-2">
+<h2 id="orgecbc6cb"><span class="section-number-2">4</span> Legacy BIOS</h2>
+<div class="outline-text-2" id="text-4">
 <p>
-My <code>VOID_LIVE/syslinux/syslinux.cfg</code>, Check <code>boot/isolinux/isolinux.cfg</code> from ISO
+I use syslinux because it's more lightweight than grub, <code>syslinux</code> the package is required to install syslinux to USB stick. You can use the minimal config or graphical boot menu config, I recommend to use the minimal one.
 </p>
-<pre class="example">
-UI vesamenu.c32
-PROMPT 0
-TIMEOUT 100
-ONTIMEOUT linux
+</div>
 
-MENU TABMSG Press ENTER to boot or TAB to edit a menu entry
-MENU AUTOBOOT BIOS default device boot in # second{,s}...
-MENU BACKGROUND splash.png
-MENU WIDTH 78
-MENU MARGIN 1
-MENU ROWS 4
-MENU VSHIFT 2
-MENU TIMEOUTROW 8
-MENU TABMSGROW 2
-MENU CMDLINEROW 11
-MENU HELPMSGROW 16
-MENU HELPMSGENDROW 29
-
-MENU COLOR title        * #FF5255FF *
-MENU COLOR border       * #00000000 #00000000 none
-MENU COLOR sel          * #ffffffff #FF5255FF *
-
-LABEL linux
-MENU LABEL Void Linux 5.3.9_1 x86_64-musl
-KERNEL /LiveOS/vmlinuz
-APPEND initrd=/LiveOS/initrd root=live:CDLABEL=VOID_LIVE init=/sbin/init ro rd.luks=0 rd.md=0 rd.dm=0 loglevel=4 vconsole.unicode=1 vconsole.keymap=dvorak-programmer locale.LANG=en_US.UTF-8  rd.live.overlay.overlayfs=1 
-LABEL linuxram
-MENU LABEL Void Linux 5.3.9_1 x86_64-musl (RAM)
-KERNEL /LiveOS/vmlinuz
-APPEND initrd=/LiveOS/initrd root=live:CDLABEL=VOID_LIVE init=/sbin/init ro rd.luks=0 rd.md=0 rd.dm=0 loglevel=4 vconsole.unicode=1 vconsole.keymap=dvorak-programmer locale.LANG=en_US.UTF-8  rd.live.overlay.overlayfs=1  rd.live.ram
-LABEL c
-MENU LABEL Boot first HD found by BIOS
-COM32 chain.c32
-APPEND hd0
-</pre>
+<div id="outline-container-orgcf2ba9a" class="outline-3">
+<h3 id="orgcf2ba9a"><span class="section-number-3">4.1</span> Minimal config</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
-Minimal <code>VOID_LIVE/syslinux/syslinux.cfg</code>
+To avoid syslinux <code>Boot Error</code> I just use this minimal configuration without any non-core syslinux modules, and only run the extlinux/syslinux command once. I recommend you to create the Live USB in this order.
+</p>
+
+<ol class="org-ol">
+<li>Create FAT32 filesystem</li>
+<li>mount it to VOID_​LIVE, create VOID_​LIVE/syslinux/ folder</li>
+<li>Install syslinux with <code>extlinux --install VOID_LIVE/syslinux</code></li>
+<li>Add syslinux/syslinux.cfg and LiveOS/{vmlinuz,initrd,squashfs.img}</li>
+</ol>
+
+<p>
+<code>syslinux/syslinux.cfg</code>
 </p>
 <pre class="example">
 PROMPT 1
@@ -230,99 +208,35 @@ TIMEOUT 50
 DEFAULT voidram
 
 LABEL void
-	LINUX ../LiveOS/vmlinuz
+	LINUX /LiveOS/vmlinuz
 	APPEND initrd=/LiveOS/initrd root=live:CDLABEL=VOID_LIVE init=/sbin/init ro rd.luks=0 rd.md=0 rd.dm=0 loglevel=4 vconsole.unicode=1 vconsole.keymap=dvorak-programmer locale.LANG=en_US.UTF-8  rd.live.overlay.overlayfs=1
-	INITRD ../LiveOS/initrd
 
 LABEL voidram
-	LINUX ../LiveOS/vmlinuz
+	LINUX /LiveOS/vmlinuz
 	APPEND initrd=/LiveOS/initrd root=live:CDLABEL=VOID_LIVE init=/sbin/init ro rd.luks=0 rd.md=0 rd.dm=0 loglevel=4 vconsole.unicode=1 vconsole.keymap=dvorak-programmer locale.LANG=en_US.UTF-8  rd.live.overlay.overlayfs=1  rd.live.ram
-	INITRD ../LiveOS/initrd
 </pre>
 </div>
-</section>
-
-<section id="outline-container-org21ef77a" class="outline-2">
-<h2 id="org21ef77a"><span class="section-number-2">3</span> Create FAT32 Partitionless Void Linux Live USB</h2>
-<div class="outline-text-2" id="text-3">
-</div>
-<div id="outline-container-orgd05d3a2" class="outline-3">
-<h3 id="orgd05d3a2"><span class="section-number-3">3.1</span> Download void-live ISO and bootloaders</h3>
-<div class="outline-text-3" id="text-3-1">
-<ul class="org-ul">
-<li><a href="https://voidlinux.org/download/">void-live</a>, I use <code>void-live-x86_64-musl-20191109.iso</code></li>
-<li><a href="https://www.rodsbooks.com/refind/getting.html">rEFInd</a>, I use <code>refind</code> the void package</li>
-<li><a href="https://wiki.syslinux.org/wiki/index.php?title=Download">syslinux</a>, I use <code>syslinux</code> the void package</li>
-</ul>
-</div>
 </div>
 
-<div id="outline-container-org29f9b38" class="outline-3">
-<h3 id="org29f9b38"><span class="section-number-3">3.2</span> Create the FAT32 filesystem and label it</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-org68c5cce" class="outline-3">
+<h3 id="org68c5cce"><span class="section-number-3">4.2</span> Graphical boot menu</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
-Assume the USB stick where we are going to create LiveOS is <code>/dev/sdc</code> and the FAT32 volume name is <code>VOID_LIVE</code>, note the volume name should be identical as boot options specified in bootloader configuration files.
+You can check <code>boot/isolinux/{*.c32,isolinux.cfg}</code> from void-live iso for dependencies and config to use graphical boot menu, but from my experience you need to create the Live USB in this order to avoid syslinux <code>Boot Error</code> (not able to boot), especially when the squashfs.img is large.
 </p>
-<div class="org-src-container">
-<pre class="src src-sh">sudo mkfs.vfat -I -F32 -n VOID_LIVE /dev/sdc
-mkdir VOID_LIVE
-sudo mount /dev/sdc VOID_LIVE
-</pre>
-</div>
-</div>
-</div>
 
-<div id="outline-container-orgfe63804" class="outline-3">
-<h3 id="orgfe63804"><span class="section-number-3">3.3</span> Grab files from void-live ISO</h3>
-<div class="outline-text-3" id="text-3-3">
+<ol class="org-ol">
+<li>Create FAT32 filesystem</li>
+<li>mount it to VOID_​LIVE</li>
+<li>Add <code>syslinux/{chain,libcom32,libutil,vesamenu}.c32</code> (from <code>/usr/lib/syslinux</code>), <code>/syslinux.cfg</code> (optionally <code>splash.png</code>), and <code>LiveOS/{vmlinuz,initrd}</code></li>
+<li>Install syslinux with <code>extlinux --install VOID_LIVE/syslinux</code></li>
+<li>Add VOID_​LIVE/LiveOS/squashfs.img</li>
+<li>umount VOID_​LIVE</li>
+</ol>
+
 <p>
-Assume we are using <code>void-live-x86_64-musl-20191109.iso</code>
+Note it may won't able to boot if you change any of files syslinux may load, including kernel and initramfs. Reinstall syslinux to the USB stick won't help and the only solution I know is recreate the FAT32 filesystem and start over again.
 </p>
-<div class="org-src-container">
-<pre class="src src-sh">mkdir void-live-x86_64-musl-20191109
-sudo mount void-live-x86_64-musl-20191109.iso void-live-x86_64-musl-20191109
-sudo mkdir VOID_LIVE/LiveOS
-sudo cp void-live-x86_64-musl-20191109/boot/{initrd,vmlinuz} VOID_LIVE/LiveOS
-<span class="org-comment-delimiter">## </span><span class="org-comment">Optionally grab splash.png</span>
-sudo mkdir VOID_LIVE/syslinux
-sudo cp void-live-x86_64-musl-20191109/boot/isolinux/splash.png VOID_LIVE/syslinux
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org895b983" class="outline-3">
-<h3 id="org895b983"><span class="section-number-3">3.4</span> rEFInd for UEFI</h3>
-<div class="outline-text-3" id="text-3-4">
-<div class="org-src-container">
-<pre class="src src-sh">sudo xbps-install -S refind
-sudo mkdir VOID_LIVE/EFI/refind
-sudo cp -r /usr/share/refind/icons VOID_LIVE/EFI/refind/
-sudo cp /usr/share/refind/refind_x64.efi VOID_LIVE/EFI/refind/
-sudo cp VOID_LIVE/EFI/{refind/refind_x64.efi,BOOT/BOOTX64.efi}
-<span class="org-comment-delimiter">## </span><span class="org-comment">Optionall get https://github.com/munlik/refind-theme-regular</span>
-<span class="org-comment-delimiter">## </span><span class="org-comment">And put it under VOID_LIVE/EFI/refind/themes/</span>
-sudo vim VOID_LIVE/refind/refind.conf
-sudo cp VOID_LIVE/{refind,BOOT}/refind.conf
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orge0f7187" class="outline-3">
-<h3 id="orge0f7187"><span class="section-number-3">3.5</span> syslinux for Legacy BIOS</h3>
-<div class="outline-text-3" id="text-3-5">
-<div class="org-src-container">
-<pre class="src src-sh">sudo xbps-install -S syslinux
-sudo mkdir VOID_LIVE/syslinux
-sudo cp /usr/lib/syslinux/{chain,libcom32,libutil,vesamenu}.c32 VOID_LIVE/syslinux
-sudo extlinux --install VOID_LIVE/syslinux
-sudo vim VOID_LIVE/syslinux/syslinux.cfg
-sudo umount VOID_LIVE
-<span class="org-comment-delimiter">## </span><span class="org-comment">Or use syslinux command instead extlinux when the device is umounted</span>
-<span class="org-comment-delimiter">#</span><span class="org-comment">sudo syslinux --directory syslinux --install /dev/sdc</span>
-</pre>
-</div>
 </div>
 </div>
 </section>
@@ -331,11 +245,11 @@ sudo umount VOID_LIVE
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
-<a href="https://github.com/void-linux/void-mklive">void-mklive</a>
+<a href="https://unix.stackexchange.com/a/103568">For Legacy BIOS, Using a filesystem without a partition table thus not only saves space, but also a step in the boot process.</a>
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
-<a href="https://unix.stackexchange.com/a/103568">For Legacy BIOS, Using a filesystem without a partition table thus not only saves space, but also a step in the boot process.</a>
+Use the official <a href="https://voidlinux.org/download/">void-live</a> or create your own iso by using <a href="https://github.com/void-linux/void-mklive">void-mklive</a>
 </p></div></div>
 
 

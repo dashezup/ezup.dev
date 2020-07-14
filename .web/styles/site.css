@@ -34,7 +34,6 @@ body {
   body h3 {
   font-size: 5px;
   margin-top: 21px;
-  font-weight: bold;
   }
   body div.org-src-container pre {
     font-size: 13px;
@@ -48,14 +47,17 @@ body {
 div#text-table-of-contents ul li ul {
   margin-top: 0.5em;
 }
+#table-of-contents h2 {
+  font-size: 28px;
+  font-weight: normal;
+}
 p.subtitle {
   font-size: 17px;
   margin-top: 1em;
   margin-bottom: 1.4em;
 }
 h2.footnotes {
-  font-weight: bold;
-  font-size: 30px;
+  font-size: 28px;
   margin-bottom: 5px;
 }
 p.footpara {
@@ -90,17 +92,15 @@ body h4 img {
 body h1 {
   font-size: 41px;
   margin-top: 0.8em;
-  font-weight: bold;
 }
 body h2 {
   margin-top: 0.9em;
   position: relative;
-  font-size: 35px;
+  font-size: 30px;
 }
 body h3 {
-  font-size: 23px;
+  font-size: 25px;
   margin-top: 1em;
-  font-weight: bold;
 }
 body p {
   text-align: justify;
@@ -129,7 +129,7 @@ body code {
   font-size: .9em;
 }
 body li {
-  margin-bottom: 0.6em;
+  margin-bottom: 0.4em;
   line-height: 1;
 }
 body img {
