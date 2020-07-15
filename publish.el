@@ -2,17 +2,24 @@
 
 (require 'package)
 (package-initialize)
-(unless package-archive-contents
-  (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-  (package-refresh-contents))
-(dolist (pkg '(org-plus-contrib htmlize))
-  (unless (package-installed-p pkg)
-    (package-install pkg)))
+;(unless package-archive-contents
+  ;(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+  ;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  ;(package-refresh-contents))
+;(dolist (pkg '(org-plus-contrib htmlize))
+  ;(unless (package-installed-p pkg)
+    ;(package-install pkg)))
+
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-refresh-contents)
+(package-install 'htmlize)
+(package-install 'org-plus-contrib)
+(package-install 'ox-reveal)
 
 (require 'org)
 (require 'ox-publish)
-(require 'ox-rss)
+(require 'ox-reveal)
 
 
 (defvar ezup-url "https://ezup.dev/blog/")
