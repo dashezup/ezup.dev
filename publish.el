@@ -221,7 +221,12 @@ PROJECT is the current project."
          :base-extension "html"
          :publishing-directory ".web"
          :publishing-function org-publish-attachment)
-        ("website" :components ("posts" "rss" "images" "css" "fonts" "html"))))
+	("keys"
+	 :base-directory "keys"
+	 :base-extension "asc"
+	 :publishing-directory ".web/keys"
+	 :publishing-function org-publish-attachment)
+        ("website" :components ("posts" "rss" "images" "css" "fonts" "html" "keys"))))
 
 (provide 'publish)
 
