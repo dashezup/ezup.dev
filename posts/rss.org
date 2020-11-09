@@ -4,11 +4,11 @@
 :PROPERTIES:
 :RSS_PERMALINK: fat32-partitionless-voidlinux-liveusb.html
 :PUBDATE:  2020-07-14
-:ID:       54efb4ed-cdaf-4761-826b-22862644f8b6
+:ID:       e2e6fe3a-4eae-4104-92b3-7611006973f9
 :END:
 * Create and Use OpenPGP Keys
 :PROPERTIES:
 :RSS_PERMALINK: create-and-use-openpgp-keys.html
 :PUBDATE:  2020-06-30
-:ID:       7057ecab-0e27-4763-9b2d-c84449f04a89
+:ID:       e3fe1c18-b56b-4046-81f1-bf99e392a7e5
 :END:

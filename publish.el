@@ -203,7 +203,7 @@ PROJECT is the current project."
          :publishing-function org-publish-attachment)
         ("favicon"
          :base-directory "."
-         :base-extension "svg"
+         :base-extension "svg\\|ico"
          :publishing-directory ".web"
          :publishing-function org-publish-attachment)
         ("css"

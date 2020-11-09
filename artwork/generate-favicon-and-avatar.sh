@@ -4,6 +4,7 @@
 rm -rf favicon
 mkdir favicon
 convert ezup-logo-rounded.svg favicon/favicon.png # for stagit
+convert -density 384 ezup-logo-rounded.svg -define icon:auto-resize favicon/favicon.ico
 rsvg-convert -a -w 32 -f svg ezup-logo-rounded.svg -o favicon/logo.svg && convert favicon/logo.svg favicon/logo.png && rm favicon/logo.svg # for stagit
 
 ## Avatar

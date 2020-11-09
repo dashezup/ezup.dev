@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-10-06 -->
+<!-- 2020-11-09 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Create and Use OpenPGP Keys</title>
@@ -37,8 +37,8 @@
 In this article I'm gonna explain how do I generate and use OpenPGP keys.
 </p>
 
-<section id="outline-container-org861db44" class="outline-2">
-<h2 id="org861db44"><span class="section-number-2">1</span> Install GnuPG</h2>
+<section id="outline-container-org6fd5028" class="outline-2">
+<h2 id="org6fd5028"><span class="section-number-2">1</span> Install GnuPG</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 On macOS you can use brew to install GnuPG <code>brew install gnupg</code>, you will also need <code>pinentry-mac</code> package if you are going to use it with GUI programs such like Thunderbird with Eng
@@ -46,8 +46,8 @@ On macOS you can use brew to install GnuPG <code>brew install gnupg</code>, you 
 </div>
 </section>
 
-<section id="outline-container-orge22fb25" class="outline-2">
-<h2 id="orge22fb25"><span class="section-number-2">2</span> OpenPGP key generation</h2>
+<section id="outline-container-orgcd8d0be" class="outline-2">
+<h2 id="orgcd8d0be"><span class="section-number-2">2</span> OpenPGP key generation</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Beside <code>gpg --full-generate-key</code>, you can also create a key with gpg in batch mode<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
@@ -84,8 +84,8 @@ gpg --batch --generate-key first-last.txt
 </div>
 </section>
 
-<section id="outline-container-orgd8c87b6" class="outline-2">
-<h2 id="orgd8c87b6"><span class="section-number-2">3</span> Use subkeys</h2>
+<section id="outline-container-orgcfe6377" class="outline-2">
+<h2 id="orgcfe6377"><span class="section-number-2">3</span> Use subkeys</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 I use encryption and signing subkeys instead of just use one key for everything, because it's safer when you keep your master key elsewhere and use different keys for different purposes. Debian also recommend to use subkeys.<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>
@@ -104,8 +104,8 @@ gpg --edit-key &lt;key-id&gt; passwd
 </pre>
 </div>
 </div>
-<div id="outline-container-org9a7a843" class="outline-3">
-<h3 id="org9a7a843"><span class="section-number-3">3.1</span> Thunderbird and Enigmail</h3>
+<div id="outline-container-org7927c1a" class="outline-3">
+<h3 id="org7927c1a"><span class="section-number-3">3.1</span> Thunderbird and Enigmail</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 I use Thunderbird with Enigmail to send and receive PGP encrypted emails, you can follow <a href="https://ssd.eff.org/en/module/how-use-pgp-mac-os-x">the guide by EFF SSD</a> to set it up. Note you need to install <code>pinentry-mac</code> the package to use GPG with such GUI programs.
@@ -117,8 +117,8 @@ I use Thunderbird with Enigmail to send and receive PGP encrypted emails, you ca
 </div>
 </div>
 </div>
-<div id="outline-container-orgcf7eb5b" class="outline-3">
-<h3 id="orgcf7eb5b"><span class="section-number-3">3.2</span> Git</h3>
+<div id="outline-container-orgcc940b3" class="outline-3">
+<h3 id="orgcc940b3"><span class="section-number-3">3.2</span> Git</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-sh">git config --global gpg.program $(<span class="org-builtin">which</span> gpg)
@@ -133,8 +133,8 @@ In case you don't want to sign commits for specific repo, just run <code>git con
 </p>
 </div>
 </div>
-<div id="outline-container-org583b7bd" class="outline-3">
-<h3 id="org583b7bd"><span class="section-number-3">3.3</span> pass (the standard unix password manager)</h3>
+<div id="outline-container-org4403143" class="outline-3">
+<h3 id="org4403143"><span class="section-number-3">3.3</span> pass (the standard unix password manager)</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 I use <a href="https://www.passwordstore.org/">pass</a> to manage my passwords, with a different key. pass store passwords in a git repo, you can also store the <code>$GNUPGHOME</code> in a git repo or just in the same repo.
