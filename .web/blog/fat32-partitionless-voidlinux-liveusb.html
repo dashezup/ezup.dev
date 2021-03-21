@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-01-09 -->
+<!-- 2021-03-21 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FAT32 Partitionless Void Linux Live USB</title>
@@ -37,26 +37,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org910dc9a">1. What is this about and why do I create Live USB this way</a>
+<li><a href="#org994254c">1. What is this about and why do I create Live USB this way</a>
 <ul>
-<li><a href="#orgb22f769">1.1. Advantages</a></li>
-<li><a href="#orgb994bcf">1.2. How does it work?</a></li>
+<li><a href="#orgaf16b49">1.1. Advantages</a></li>
+<li><a href="#org0dbcdad">1.2. How does it work?</a></li>
 </ul>
 </li>
-<li><a href="#orgca0696b">2. FAT32 filesystem creation and file directory structure</a></li>
-<li><a href="#org9b3121f">3. UEFI</a></li>
-<li><a href="#org5a23f11">4. Legacy BIOS</a>
+<li><a href="#orgffdd0f9">2. FAT32 filesystem creation and file directory structure</a></li>
+<li><a href="#org9cada5f">3. UEFI</a></li>
+<li><a href="#org055eedc">4. Legacy BIOS</a>
 <ul>
-<li><a href="#orgc3439ef">4.1. Minimal config</a></li>
-<li><a href="#org31b2197">4.2. Graphical boot menu</a></li>
+<li><a href="#orga3ee035">4.1. Minimal config</a></li>
+<li><a href="#orga31ec01">4.2. Graphical boot menu</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<section id="outline-container-org910dc9a" class="outline-2">
-<h2 id="org910dc9a"><span class="section-number-2">1</span> What is this about and why do I create Live USB this way</h2>
+<section id="outline-container-org994254c" class="outline-2">
+<h2 id="org994254c"><span class="section-number-2">1</span> What is this about and why do I create Live USB this way</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 I use void-live as my Live USB because it supports booting into RAM, so I can eject USB stick after boot into LiveOS. And it's esay to use void-mklive to generate customized iso, it's simple and just works.
@@ -71,8 +71,8 @@ The solution is pretty simple, just create one FAT32 filesystem on the USB stick
 </p>
 </div>
 
-<div id="outline-container-orgb22f769" class="outline-3">
-<h3 id="orgb22f769"><span class="section-number-3">1.1</span> Advantages</h3>
+<div id="outline-container-orgaf16b49" class="outline-3">
+<h3 id="orgaf16b49"><span class="section-number-3">1.1</span> Advantages</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Works for both UEFI and Legacy BIOS</li>
@@ -85,8 +85,8 @@ The solution is pretty simple, just create one FAT32 filesystem on the USB stick
 </div>
 </div>
 
-<div id="outline-container-orgb994bcf" class="outline-3">
-<h3 id="orgb994bcf"><span class="section-number-3">1.2</span> How does it work?</h3>
+<div id="outline-container-org0dbcdad" class="outline-3">
+<h3 id="org0dbcdad"><span class="section-number-3">1.2</span> How does it work?</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 It's pretty simple, just install the bootloader, configure it to load <code>vmlinuz</code> the linux kernel and <code>initrd</code> the initramfs and it will load <code>LiveOS/squashfs.img</code> from the FAT32 filesystem which labeled as <code>VOID_​LIVE</code>.
@@ -107,8 +107,8 @@ For Legacy BIOS, when you have a partition table on the hard drive, you need to 
 </div>
 </section>
 
-<section id="outline-container-orgca0696b" class="outline-2">
-<h2 id="orgca0696b"><span class="section-number-2">2</span> FAT32 filesystem creation and file directory structure</h2>
+<section id="outline-container-orgffdd0f9" class="outline-2">
+<h2 id="orgffdd0f9"><span class="section-number-2">2</span> FAT32 filesystem creation and file directory structure</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Assume the USB stick where we are going to create Live USB on is <code>/dev/sdc</code> and the FAT32 volume name is <code>VOID_LIVE</code>, you can create it with this command. Note the volume name can be other value but must be identical as boot options specified in bootloader configuration files.
@@ -149,8 +149,8 @@ VOID_LIVE
 </div>
 </section>
 
-<section id="outline-container-org9b3121f" class="outline-2">
-<h2 id="org9b3121f"><span class="section-number-2">3</span> UEFI</h2>
+<section id="outline-container-org9cada5f" class="outline-2">
+<h2 id="org9cada5f"><span class="section-number-2">3</span> UEFI</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 I use rEFInd Boot Manager for UEFI boot, you can just download it from <a href="https://www.rodsbooks.com/refind/getting.html">the official website</a> and copy it to the FAT32 filesystem, or install <code>refind</code> the voidlinux package and then copy it from <code>/usr/share/refind</code>. It looks better with themes such like <a href="https://github.com/munlik/refind-theme-regular">refind-theme-regular</a>. You are free to customize it.
@@ -159,7 +159,7 @@ I use rEFInd Boot Manager for UEFI boot, you can just download it from <a href="
 <p>
 <code>EFI/{BOOT,refind}/refind.conf</code>
 </p>
-<pre class="example" id="org7f8cece">
+<pre class="example" id="org3bca618">
 timeout 20
 
 menuentry "Void Linux (x86_64-musl)" {
@@ -177,16 +177,16 @@ menuentry "Void Linux (x86_64-musl) (RAM)" {
 </div>
 </section>
 
-<section id="outline-container-org5a23f11" class="outline-2">
-<h2 id="org5a23f11"><span class="section-number-2">4</span> Legacy BIOS</h2>
+<section id="outline-container-org055eedc" class="outline-2">
+<h2 id="org055eedc"><span class="section-number-2">4</span> Legacy BIOS</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 I use syslinux because it's more lightweight than grub, <code>syslinux</code> the package is required to install syslinux to USB stick. You can use the minimal config or graphical boot menu config, I recommend to use the minimal one.
 </p>
 </div>
 
-<div id="outline-container-orgc3439ef" class="outline-3">
-<h3 id="orgc3439ef"><span class="section-number-3">4.1</span> Minimal config</h3>
+<div id="outline-container-orga3ee035" class="outline-3">
+<h3 id="orga3ee035"><span class="section-number-3">4.1</span> Minimal config</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 To avoid syslinux <code>Boot Error</code> I just use this minimal configuration without any non-core syslinux modules, and only run the extlinux/syslinux command once. I recommend you to create the Live USB in this order.
@@ -202,7 +202,7 @@ To avoid syslinux <code>Boot Error</code> I just use this minimal configuration 
 <p>
 <code>syslinux/syslinux.cfg</code>
 </p>
-<pre class="example" id="orga7b276f">
+<pre class="example" id="org3ba0504">
 PROMPT 1
 TIMEOUT 50
 DEFAULT voidram
@@ -218,8 +218,8 @@ LABEL voidram
 </div>
 </div>
 
-<div id="outline-container-org31b2197" class="outline-3">
-<h3 id="org31b2197"><span class="section-number-3">4.2</span> Graphical boot menu</h3>
+<div id="outline-container-orga31ec01" class="outline-3">
+<h3 id="orga31ec01"><span class="section-number-3">4.2</span> Graphical boot menu</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 You can check <code>boot/isolinux/{*.c32,isolinux.cfg}</code> from void-live iso for dependencies and config to use graphical boot menu, but from my experience you need to create the Live USB in this order to avoid syslinux <code>Boot Error</code> (not able to boot), especially when the squashfs.img is large.
